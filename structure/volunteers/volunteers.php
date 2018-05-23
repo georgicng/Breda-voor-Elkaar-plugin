@@ -4,6 +4,12 @@
  */
 
  /**
+  * Make volunteer the default user-role
+  */
+add_filter('pre_option_default_role', function($default_role){
+    return 'volunteer'; // This is changed
+});
+ /**
   * Add Custom Fields on plugin init.
   */
   function register_custom_fields_volunteer(){
