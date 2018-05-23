@@ -23,13 +23,18 @@
 class Breda_Voor_Elkaar_Activator {
 
 	/**
-	 * Short Description. (use period)
+	 * Function called on activation.
 	 *
-	 * Long Description.
+	 * Creates user roles.
 	 *
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+        /**
+         * Add User Roles
+         */
+        add_role('organisation', 'Organisatie', array('read' => true, 'level_0' => true));
+        add_role('volunteer', 'Vrijwilliger', array('read' => true, 'level_0' => true));
 
 	}
 
