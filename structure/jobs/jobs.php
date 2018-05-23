@@ -15,6 +15,7 @@ function create_post_type_jobs() {
         ),
         'public' => true,
         'has_archive' => true,
+        'taxonomies' => array( 'category' )
       )
     );
   }
