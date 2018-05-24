@@ -6,7 +6,7 @@
 /**
   * Add Custom Fields on plugin init.
   */
-  function register_custom_fields_organisation(){
+function register_custom_fields_organisation(){
     if(function_exists("register_field_group")){
         register_field_group(array (
             'id' => 'acf_organisations',
@@ -83,7 +83,5 @@
             'menu_order' => 0,
         ));
     }
-
-  }
-  add_action( 'plugins_loaded', 'register_custom_fields_organisation' );
-  
+}
+add_action( 'plugins_loaded', 'register_custom_fields_organisation' );

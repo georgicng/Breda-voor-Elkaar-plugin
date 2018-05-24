@@ -10,10 +10,10 @@ add_filter('pre_option_default_role', function($default_role){
     return 'volunteer'; // This is changed
 });
 
- /**
-  * Add Custom Fields on plugin init.
-  */
-  function register_custom_fields_volunteer(){
+/**
+ * Add Custom Fields on plugin init.
+ */
+function register_custom_fields_volunteer(){
     if(function_exists("register_field_group")){
         register_field_group(array (
             'id' => 'acf_vrijwilliger',
@@ -102,5 +102,5 @@ add_filter('pre_option_default_role', function($default_role){
             'menu_order' => 0,
         ));
     }
-  }
-  add_action( 'plugins_loaded', 'register_custom_fields_volunteer' );
+}
+add_action( 'plugins_loaded', 'register_custom_fields_volunteer' );
