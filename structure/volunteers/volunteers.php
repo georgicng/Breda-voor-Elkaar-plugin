@@ -9,6 +9,7 @@
 add_filter('pre_option_default_role', function($default_role){
     return 'volunteer'; // This is changed
 });
+
  /**
   * Add Custom Fields on plugin init.
   */
@@ -58,15 +59,15 @@ add_filter('pre_option_default_role', function($default_role){
                     'name' => 'opleiding',
                     'type' => 'select',
                     'choices' => array (
-                        'opleiding1,' => 'opleiding1,',
-                        'opleiding2,' => 'opleiding2,',
-                        'opleiding3,' => 'opleiding3,',
-                        'opleiding4,' => 'opleiding4,',
-                        'opleiding5,' => 'opleiding5,',
-                        'opleiding6,' => 'opleiding6,',
-                        'opleiding7,' => 'opleiding7,',
-                        'opleiding8,' => 'opleiding8,',
-                        'opleiding9,' => 'opleiding9,',
+                        'opleiding1' => 'opleiding1',
+                        'opleiding2' => 'opleiding2',
+                        'opleiding3' => 'opleiding3',
+                        'opleiding4' => 'opleiding4',
+                        'opleiding5' => 'opleiding5',
+                        'opleiding6' => 'opleiding6',
+                        'opleiding7' => 'opleiding7',
+                        'opleiding8' => 'opleiding8',
+                        'opleiding9' => 'opleiding9',
                     ),
                     'default_value' => '',
                     'allow_null' => 0,
