@@ -66,9 +66,9 @@
             'location' => array (
                 array (
                     array (
-                        'param' => 'post_type',
+                        'param' => 'ef_user',
                         'operator' => '==',
-                        'value' => 'post',
+                        'value' => 'organisation',
                         'order_no' => 0,
                         'group_no' => 0,
                     ),
@@ -86,3 +86,4 @@
 
   }
   add_action( 'plugins_loaded', 'register_custom_fields_organisation' );
+  
