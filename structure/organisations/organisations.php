@@ -85,3 +85,8 @@ function register_custom_fields_organisation(){
     }
 }
 add_action( 'plugins_loaded', 'register_custom_fields_organisation' );
+
+/**
+ * Change template for this role
+ */
+
