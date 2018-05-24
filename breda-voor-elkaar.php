@@ -39,7 +39,7 @@ define( 'PLUGIN_NAME_VERSION', '1.0.0' );
 /**
 * Include our customization to the WordPress structure.
 */
-include( plugin_dir_path( __FILE__ ) . 'structure/jobs/jobs.php');
+include( plugin_dir_path( __FILE__ ) . 'structure/vacancies/vacancies.php');
 include( plugin_dir_path( __FILE__ ) . 'structure/organisations/organisations.php');
 include( plugin_dir_path( __FILE__ ) . 'structure/volunteers/volunteers.php');
 include_once(plugin_dir_path( __DIR__ ).'advanced-custom-fields/acf.php');
