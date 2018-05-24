@@ -91,3 +91,12 @@ function run_breda_voor_elkaar() {
 }
 run_breda_voor_elkaar();
 
+/**
+ * Change author slug
+ */
+add_action('init', 'change_author_slug');
+function change_author_slug() {
+    global $wp_rewrite;
+    $author_slug = 'profile'; // change slug name
+    $wp_rewrite->author_base = $author_slug;
+}
