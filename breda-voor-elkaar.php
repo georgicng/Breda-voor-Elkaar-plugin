@@ -104,7 +104,7 @@ function change_author_slug() {
 /**
  * Change author template
  */
-function change_template_volunteer($template) {
+function change_template_author($template) {
     if(is_author()){
 		$author_id = get_query_var( 'author' );
 		$author_meta = get_userdata($author_id);
@@ -119,4 +119,4 @@ function change_template_volunteer($template) {
 	}
     return $template;
 }
-add_filter( 'template_include', 'change_template_volunteer' );
+add_filter( 'template_include', 'change_template_author' );
