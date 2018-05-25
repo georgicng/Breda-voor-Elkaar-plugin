@@ -16,7 +16,7 @@ Plugin that adds custom functionality as per Breda voor Elkaar's needs.
 
 == Installation ==
 
-1. Upload `breda-voor-elkaar.zip` to the `/wp-content/plugins/` directory
+1. Upload the `breda-voor-elkaar` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Changelog ==
