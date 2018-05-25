@@ -32,21 +32,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
+ * Start at version 0.1.0 and use SemVer - https://semver.org
  */
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'PLUGIN_NAME_VERSION', '0.1.0' );
 
-/**
-* Include our customization to the WordPress structure.
-*/
-include( plugin_dir_path( __FILE__ ) . 'structure/vacancies/vacancies.php');
-include( plugin_dir_path( __FILE__ ) . 'structure/organisations/organisations.php');
-include( plugin_dir_path( __FILE__ ) . 'structure/volunteers/volunteers.php');
-if(class_exists('acf')) {
-	include_once(plugin_dir_path( __DIR__ ).'advanced-custom-fields-pro/acf.php');
-} else{
-	error_log('ACF-PRO is not installed! Please install ACF pro to continue...');
-} 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-breda-voor-elkaar-activator.php
