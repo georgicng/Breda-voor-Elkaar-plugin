@@ -92,6 +92,8 @@ function change_author_slug() {
 
 /**
  * Change author template
+ *
+ * @param $template represents the template as it came in through the template_include hook
  */
 function change_template_author($template) {
     if(is_author()){
