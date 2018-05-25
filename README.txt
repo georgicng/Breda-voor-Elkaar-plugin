@@ -21,10 +21,10 @@ Plugin that adds custom functionality as per Breda voor Elkaar's needs.
 
 == Changelog ==
 
-= 1.0 =
+= 0.1.0 =
 * Our starting point. Files were changed to reflect our goals.
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 0.1.0 =
 Upgrade notices describe the reason a user should upgrade.  There are none at this point.
