@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: jjvansteijn
+Contributors: jjvansteijn, lucianonooijen
 Donate link: https://bytecode.nl
 Tags: volunteer, platform
 Requires at least: 3.0.1
