@@ -140,11 +140,9 @@ class Breda_Voor_Elkaar {
 		/**
 		 * The ACF plugin dependency, which is used to add fields to the above post and user types
 		 */
-		if(class_exists('acf')) {
-			//To Do: add ACF dependency here 'the right way'
-		} else{
-			error_log('ACF-PRO is not installed! Please install ACF pro to continue...');
-		} 
+		if(!class_exists('acf')) {
+			error_log('ACF(-PRO) is not installed! Please install ACF pro to continue...');
+		}
 
 		$this->loader = new Breda_Voor_Elkaar_Loader();
 
