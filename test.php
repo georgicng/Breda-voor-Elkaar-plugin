@@ -7,8 +7,8 @@ final class Test extends TestCase
 {
     public function testExample(): void
     {
-        'test'->assertEquals(
-            'test'
+        1->assertEquals(
+            1
         );
     }
 }
