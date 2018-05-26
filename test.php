@@ -5,10 +5,9 @@ use PHPUnit\Framework\TestCase;
 
 final class Test extends TestCase
 {
-    public function testExample(): void
+    public function dummyTest()
     {
-        1->assertEquals(
-            1
-        );
+        $this->assertEquals(1, 1);
     }
+
 }
