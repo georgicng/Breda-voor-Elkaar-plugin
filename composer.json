@@ -9,7 +9,11 @@
     "authors": [
         {
             "name": "Jeroen van Steijn",
-            "email": "J.J.vanSteijn@student.tudelft.nl"
+            "email": "jeroen@bytecode.nl"
+        },
+        {
+            "name": "Luciano Nooijen",
+            "email": "luciano@bytecode.nl"
         }
     ]
 }
