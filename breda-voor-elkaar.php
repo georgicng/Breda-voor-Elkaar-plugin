@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Breda voor Elkaar
  * Plugin URI:        https://bytecode.nl
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Adds all custom functionality for Breda voor Elkaar
  * Version:           1.0.0
  * Author:            Bytecode Digital Agency B.V.
  * Author URI:        https://bytecode.nl
@@ -32,10 +32,9 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Start at version 0.1.0 and use SemVer - https://semver.org
  */
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'PLUGIN_NAME_VERSION', '0.1.0' );
 
 /**
  * The code that runs during plugin activation.
@@ -80,3 +79,35 @@ function run_breda_voor_elkaar() {
 
 }
 run_breda_voor_elkaar();
+
+/**
+ * Change author slug
+ */
+add_action('init', 'change_author_slug');
+function change_author_slug() {
+    global $wp_rewrite;
+    $author_slug = 'profile'; // change slug name
+    $wp_rewrite->author_base = $author_slug;
+}
+
+/**
+ * Change author template
+ *
+ * @param $template represents the template as it came in through the template_include hook
+ */
+function change_template_author($template) {
+    if(is_author()){
+		$author_id = get_query_var( 'author' );
+		$author_meta = get_userdata($author_id);
+		$author_roles = $author_meta->roles;
+		if(in_array('organisation',$author_roles)){
+			$template = plugin_dir_path( __FILE__ ).'structure/organisations/template.php';
+		} elseif(in_array('volunteer',$author_roles)){
+			$template = plugin_dir_path( __FILE__ ).'structure/volunteers/template.php';
+		} else{
+			echo 'user was not an organisation nor a volunteer';
+		}
+	}
+    return $template;
+}
+add_filter( 'template_include', 'change_template_author' );

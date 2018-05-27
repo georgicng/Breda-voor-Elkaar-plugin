@@ -122,6 +122,28 @@ class Breda_Voor_Elkaar {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-breda-voor-elkaar-public.php';
 
+		/**
+		 * The class reponsible for the custom post type: 'vacancy' functionality.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'structure/vacancies/vacancies.php';
+
+		/**
+		 * The class responsible for the custom user role 'organisation' functionality.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'structure/organisations/organisations.php';
+
+		/**
+		 * The class responsible for the custom user role 'volunteer' functionality.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'structure/volunteers/volunteers.php';
+		
+		/**
+		 * The ACF plugin dependency, which is used to add fields to the above post and user types
+		 */
+		if(!class_exists('acf')) {
+			error_log('ACF(-PRO) is not installed! Please install ACF pro to continue...');
+		}
+
 		$this->loader = new Breda_Voor_Elkaar_Loader();
 
 	}
