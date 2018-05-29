@@ -89,23 +89,23 @@ function change_author_slug() {
 }
 
 /**
- * Change author template
+ * Change author template single
  *
  * @param $template represents the template as it came in through the template_include hook
  */
-function change_template_author($template) {
+function change_template_single_author($template) {
     if (is_author()) {
         $author_id = get_query_var('author');
         $author_meta = get_userdata($author_id);
         $author_roles = $author_meta->roles;
         if (in_array('organisation', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/organisations/template.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/organisations/single.php';
         } elseif (in_array('volunteer', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/template.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/single.php';
         } else {
             echo 'user was not an organisation nor a volunteer';
         }
     }
     return $template;
 }
-add_filter('template_include', 'change_template_author');
+add_filter('template_include', 'change_template_single_author');
