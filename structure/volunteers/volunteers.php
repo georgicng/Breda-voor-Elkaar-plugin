@@ -13,7 +13,8 @@ add_filter('pre_option_default_role', function ($default_role) {
 /**
  * Add Custom Fields on plugin init.
  */
-function register_custom_fields_volunteer() {
+function register_custom_fields_volunteer()
+{
     if (function_exists('register_field_group')) {
         register_field_group([
             'id' => 'acf_vrijwilliger',
@@ -24,8 +25,8 @@ function register_custom_fields_volunteer() {
                     'label' => 'adres',
                     'name' => 'adres',
                     'type' => 'google_map',
-                    'center_lat' => '',
-                    'center_lng' => '',
+                    'center_lat' => '51.5598461',
+                    'center_lng' => '4.624259',
                     'zoom' => '',
                     'height' => '',
                 ],
@@ -104,3 +105,65 @@ function register_custom_fields_volunteer() {
     }
 }
 add_action('plugins_loaded', 'register_custom_fields_volunteer');
+
+/**
+ * Register Custom Relationship Fields on init.
+ */
+function register_relationships_volunteer()
+{
+    if (function_exists('acf_add_local_field_group')):
+        acf_add_local_field_group(array(
+            'key' => 'group_5b0fe690c85d2',
+            'title' => 'Apply',
+            'fields' => array(
+                array(
+                    'key' => 'field_5b0fe6fd5dfc7',
+                    'label' => 'Applied',
+                    'name' => 'applied',
+                    'type' => 'relationship',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'post_type' => array(
+                        0 => 'vacancies',
+                    ),
+                    'taxonomy' => array(
+                    ),
+                    'filters' => array(
+                        0 => 'search',
+                        1 => 'post_type',
+                        2 => 'taxonomy',
+                    ),
+                    'elements' => '',
+                    'min' => '',
+                    'max' => '',
+                    'return_format' => 'object',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'user_role',
+                        'operator' => '==',
+                        'value' => 'volunteer',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'normal',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'label',
+            'hide_on_screen' => '',
+            'active' => 1,
+            'description' => '',
+        ));
+
+    endif;
+}
+add_action('plugins_loaded', 'register_relationships_volunteer');

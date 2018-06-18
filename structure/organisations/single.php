@@ -1,7 +1,10 @@
 <?php //get_header(); ?>
 
-<?php $ID = get_queried_object()->ID; ?>
-<?php $usermeta = get_user_meta($ID); ?>
+<?php
+$ID = get_queried_object()->ID;
+$usermeta = get_user_meta($ID);
+$userdata = get_userdata($ID);
+?>
 
 <!-- Body content -->
 
@@ -14,7 +17,7 @@
         ID: <?php echo $ID; ?>
     </li>
     <li>
-        posted on: <?php the_time('d M Y'); ?>
+        posted on: <?php echo date("d M Y", strtotime($userdata->user_registered)); ?>
     </li>
     <li>
         login name: <?php echo $usermeta['nickname'][0] ?>
@@ -25,12 +28,36 @@
     <li>
         last name: <?php echo $usermeta['last_name'][0] ?>
     </li>
+    <?php if(get_field('adres', 'user_' . $ID)){ ?>
     <li>
-        addres: <?php the_field('adres'); ?>
+        adres: <?php echo get_field('adres', 'user_' . $ID)['address']; ?>
     </li>
+    <?php } ?>
+    <?php if(get_field('adres', 'user_' . $ID)){ ?>
     <li>
-        categories: <?php the_field('categorie'); ?>
+        image: <img src="<?php echo get_field('afbeelding', 'user_' . $ID); ?>">
     </li>
+    <?php } ?>
+    <?php if(get_field('categorie', 'user_' . $ID)){ ?>
+    <li>
+        categories: <?php the_field('categorie', 'user_' . $ID); ?>
+    </li>
+    <?php } ?>
+
+<?php
+    $posts = get_field('vacancies', 'user_' . $ID);
+    if ($posts): ?>
+	<li>
+        <ul>
+	    <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
+            <li>
+                Vacancies: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
+            </li>
+        <?php endforeach;?>
+	    </ul>
+    </li>
+    <?php endif;
+?>
 <?
 wp_reset_postdata();
 ?>

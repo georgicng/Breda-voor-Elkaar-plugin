@@ -109,3 +109,58 @@ function change_template_single_author($template) {
     return $template;
 }
 add_filter('template_include', 'change_template_single_author');
+
+/**
+ * Add Google Maps API to ACF.
+ */
+function my_acf_init() {
+	// fill in Google Maps API key here
+	//acf_update_setting('google_api_key', '');
+}
+
+add_action('acf/init', 'my_acf_init');
+
+/**
+ * Modify WP Query to use ACF filters as per ACF's documentation.
+ */
+// array of filters (field key => field name)
+$GLOBALS['my_query_filters'] = array( 
+	'field_5b06d097c1efe'	=> 'frequentie', 
+    'field_5b06d0e7c1f00'	=> 'opleidingsniveau',
+    'field_5b06da1440f4e'   => 'vergoeding'
+);
+
+function use_acf_filters_in_query( $query ) {
+	// bail early if is in admin
+    if( is_admin() ) return;
+    
+	// bail early if not main query
+	// - allows custom code / plugins to continue working
+	if( !$query->is_main_query() ) return;
+	
+    // get meta query
+    if(!$query->meta_query){
+        $meta_query = array();
+    } else{
+        $meta_query = $query->get('meta_query');
+    }
+
+	// loop over filters
+	foreach( $GLOBALS['my_query_filters'] as $key => $name ) {
+		// continue if not found in url
+		if( empty($_GET[ $name ]) ) {
+			continue;
+		}
+		// get the value for this filter
+		$value = explode(',', $_GET[ $name ]);
+        // append meta query
+    	$meta_query[] = array(
+            'key'		=> $name,
+            'value'		=> $value,
+            'compare'	=> 'IN',
+        );    
+	} 
+	// update meta query
+    $query->set('meta_query', $meta_query);
+}
+add_action('pre_get_posts', 'use_acf_filters_in_query', 10, 1);
