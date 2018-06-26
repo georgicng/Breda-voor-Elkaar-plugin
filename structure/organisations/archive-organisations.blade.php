@@ -87,9 +87,9 @@ if (!empty($user_query->get_results())) {
         <?php
     }
     numeric_pagination($current_page, $num_pages);
-    filter_script('organisaties');
 } else {
     echo 'Geen organisatie gevonden die aan uw zoekopdracht voldeed.';
 }
+filter_script('organisaties');
 ?>
 @endsection
