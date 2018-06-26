@@ -83,12 +83,27 @@ if (!empty($user_query->get_results())) {
             <li> <?php echo $user->ID ?> </li>
             <li> <?php echo $user->display_name ?> </li>
             <li> <?php the_field('afbeelding', 'user_' . $user->ID)?> </li>
-            <li> <?php 
+            <li>
+            <?php 
                 if(get_field('vacancies', 'user_' . $user->ID) !== null){
                     echo count(get_field('vacancies', 'user_' . $user->ID));
                 } else{
                     echo '0';
-                }?> </li>
+                }
+            ?>
+            </li>
+            <li>
+            <?php
+            $categories = get_field('categorie', 'user_' . $user->ID);
+                if($categories){
+                    echo '<ul>';
+                    foreach($categories as $categorie){
+                        echo '<li>'.$categorie.'</li>';
+                    }
+                    echo '</ul>';
+                }
+            ?>
+            </li>
         </ul>
         <?php
     }
