@@ -19,7 +19,10 @@ $users_per_page = 10; // ToDo: make this a _get variable
 // Filters
 $meta_query = array('relation' => 'OR'); // Array of arrays that individually store key/value pairs.
 $filter_keys = array(
-    'field_5b06cc6d43567' => 'categorie',
+    'field_5b06xx6d43567' => 'soort_vrijwilligerswerk',
+    'field_5c05966d1f567' => 'ervaring',
+    'field_5c05963d1f567' => 'leeftijd',
+    'field_5b05966d1f567' => 'opleiding',
 );
 ?>
 
