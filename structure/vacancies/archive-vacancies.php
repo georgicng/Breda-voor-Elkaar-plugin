@@ -1,79 +1,117 @@
-@extends('layouts.app')
+<?php /* Template Name: Vacatures */?>
 
-@section('content')
-  @include('partials.page-header')
+<?php //get_header(); ?>
 
-<div id="archive-filters">
-<?php foreach ($GLOBALS['my_query_filters'] as $key => $name) {
-    // get the field's settings without attempting to load a value
-    $field = get_field_object($key, false, false);
-
-    // set value if available
-    if (isset($_GET[$name])) {
-        $field['value'] = explode(',', $_GET[$name]);
-    }
-
-    // create filter
-    ?>
-    <div class="filter" data-filter="<?php echo $name; ?>">
-    <?php create_field($field);?>
-    </div>
-
-<?php }?>
-</div>
-
-<?php // Posts
-if (have_posts()) {
-    while (have_posts()) {
-        the_post();
-        the_title();
-    }
+<?php
+// Pagination
+if (get_query_var('paged')) {
+    $current_page = get_query_var('paged');
+} elseif (get_query_var('page')) {
+    $current_page = get_query_var('page');
 } else {
-    echo 'Geen vacatures gevonden die voldoen aan uw zoekopdracht.';
+    $current_page = 1;
+}
+$posts_per_page = 10; // ToDo: make this a _get variable
+
+// Filters
+$meta_query = array('relation' => 'AND'); // Array of arrays that individually store key/value pairs.
+$filter_keys = array(
+    'categorie', // Enter possible filter values here.
+);
+
+// Loop over all filter keys and check if they are set in the _Get variable.
+foreach($filter_keys as $key){
+    if(isset($_GET[$key])){
+        add_to_meta_query_if_get_exists($key,$_GET[$key],$meta_query);
+    }
+}
+
+/**
+ * Add key, value pair to the post meta filters if it is set.
+ */
+function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
+    if(isset($_GET[$filter_key])){
+        $values_to_search = explode(',', $_GET[$filter_key]);
+        foreach ($values_to_search as $value) {
+            $meta_addition = array(
+                'key' => $filter_key,
+                'value' => $value,
+                'compare' => 'LIKE'
+            );
+            array_push($query,$meta_addition);
+        }
+    }
+}
+// Arguments for out main query
+$args = array(
+    // Add filter and pagination arguments here later, and get them from ?= variables with default values.
+    'post_type' => 'vacancies',
+    'number' => $posts_per_page,
+    'paged' => $current_page,
+    'meta_query' => $meta_query
+);
+
+// The Query
+$query = new WP_Query($args);
+$posts = $query->posts;
+
+// Totals for pagination
+$total_posts = $query->get_total(); // How many posts we have in total (beyond the current page)
+$num_pages = ceil($total_posts / $posts_per_page); // How many pages of posts we will need
+
+// Post Loop
+if (!empty($posts)) {
+    foreach($posts as $p) {
+        echo '<li> ID: '.$p->ID.'</li>';
+    }
+    numeric_pagination($current_page, $num_pages);
+} else {
+    echo 'Geen vacature gevonden die aan uw zoekopdracht voldeed.';
 }
 ?>
 
-<!-- Add ACF filter values to query and refresh -->
-<script type="text/javascript">
-(function($) {
-    // change
-    $('#archive-filters').on('change', 'input[type="checkbox"]', function(){
+<?php //get_footer(); ?>
 
-        // vars
-        var url = '<?php echo home_url('vacancies'); ?>';
-            args = {};
+<?php
 
-        // loop over filters
-        $('#archive-filters .filter').each(function(){
+/**
+ * Calculate pagination for posts.
+ * This should end up in breda-voor-elkaar.php and be re-used in multiple templates, instead of defined at the bottom of the templates itself.
+ */
+function numeric_pagination($current_page, $num_pages) {
+    echo '<div class="pagination">';
+    $start_number = $current_page - 2;
+    $end_number = $current_page + 2;
 
-            // vars
-            var filter = $(this).data('filter'),
-                vals = [];
+    if (($start_number - 1) < 1) {
+        $start_number = 1;
+        $end_number = min($num_pages, $start_number + 4);
+    }
+    
+    if (($end_number + 1) > $num_pages) {
+        $end_number = $num_pages;
+        $start_number = max(1, $num_pages - 4);
+    }
 
-            // find checked inputs
-            $(this).find('input:checked').each(function(){
-                vals.push( $(this).val() );
-            });
+    if ($start_number > 1) {
+        echo " 1 ... ";
+    }
 
-            // append to args
-            args[ filter ] = vals.join(',');
-        });
+    for ($i = $start_number; $i <= $end_number; $i++) {
+        if ($i === $current_page) {
+            echo '<a href="?page='.$i.'">';
+            echo " [{$i}] ";
+            echo '</a>';
+        } else {
+            echo '<a href="?page='.$i.'">';
+            echo " {$i} ";
+            echo '</a>';
+        }
+    }
 
-        // update url
-        url += '?';
-
-        // loop over args
-        $.each(args, function( name, value ){
-            url += name + '=' + value + '&';
-        });
-
-        // remove last &
-        url = url.slice(0, -1);
-
-        // reload page
-        window.location.replace( url );
-    });
-})(jQuery);
-</script>
-
-@endsection
+    if ($end_number < $num_pages) {
+        echo " ... {$num_pages} ";
+    }
+    echo '</div>';
+}
+?>

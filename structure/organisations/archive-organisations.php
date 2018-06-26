@@ -51,7 +51,6 @@ $args = array(
     'meta_query' => $meta_query
 );
 
-var_dump($meta_query);
 // The Query
 $user_query = new WP_User_Query($args);
 
