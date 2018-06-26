@@ -233,3 +233,4 @@ add_action('plugins_loaded', 'register_relationships_volunteer');
      return $page_template;
  }
  add_filter( 'page_template', 'archive_volunteer_template' );
+ 

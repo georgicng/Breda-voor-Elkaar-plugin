@@ -47,14 +47,14 @@ $userdata = get_userdata($ID);
 <?php
     $posts = get_field('vacancies', 'user_' . $ID);
     if ($posts): ?>
-	<li>
+    <li>
         <ul>
-	    <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
+        <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
             <li>
                 Vacancies: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
             </li>
         <?php endforeach;?>
-	    </ul>
+        </ul>
     </li>
     <?php endif;
 ?>

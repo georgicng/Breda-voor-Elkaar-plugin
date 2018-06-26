@@ -51,14 +51,14 @@ $userdata = get_userdata($ID);
 <?php
 $posts = get_field('applied', 'user_' . $ID);
 if ($posts): ?>
-	<li>
+    <li>
         <ul>
-	    <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
-	            <li>
-	                Applied to: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
-	            </li>
-	        <?php endforeach;?>
-	    </ul>
+        <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
+                <li>
+                    Applied to: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
+                </li>
+            <?php endforeach;?>
+        </ul>
     </li>
     <?php endif;
 ?>
