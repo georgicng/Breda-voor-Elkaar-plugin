@@ -110,14 +110,6 @@ function change_template_single_author($template) {
 }
 add_filter('template_include', 'change_template_single_author');
 
-/**
- * Add Google Maps API to ACF.
- */
-function my_acf_init() {
-    // fill in Google Maps API key here
-    //acf_update_setting('google_api_key', '');
-}
-
 add_action('acf/init', 'my_acf_init');
 
 /**
