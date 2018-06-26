@@ -169,24 +169,6 @@ function register_relationships_volunteer()
 add_action('plugins_loaded', 'register_relationships_volunteer');
 
 /**
- * Create archive page on init.
- */
-function create_archive_volunteer() {
-    $post = array(
-        'comment_status' => 'closed',
-        'ping_status' =>  'closed' ,
-        'post_author' => 1,
-        'post_date' => date('Y-m-d H:i:s'),
-        'post_name' => 'Vrijwilligers',
-        'post_status' => 'publish' ,
-        'post_title' => 'Vrijwilligers',
-        'post_type' => 'page'
-    );
-    wp_insert_post( $post );
-}
-register_activation_hook(__FILE__, 'create_archive_volunteer');
-
-/**
  * Set template for archive page.
  */    
  function archive_volunteer_template( $page_template ) {

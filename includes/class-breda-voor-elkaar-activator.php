@@ -34,5 +34,25 @@ class Breda_Voor_Elkaar_Activator {
          */
         add_role('organisation', 'Organisatie', ['read' => true, 'level_0' => true]);
         add_role('volunteer', 'Vrijwilliger', ['read' => true, 'level_0' => true]);
+        create_page('Organisaties');
+        create_page('Vrijwilligers');
+        create_page('Vacatures');
     }
+}
+
+/**
+ * Create archive page on init.
+ */
+function create_page($name) {
+    $post = array(
+        'comment_status' => 'closed',
+        'ping_status' =>  'closed' ,
+        'post_author' => 1,
+        'post_date' => date('Y-m-d H:i:s'),
+        'post_name' => $name,
+        'post_status' => 'publish' ,
+        'post_title' => $name,
+        'post_type' => 'page'
+    );
+    wp_insert_post( $post ); 
 }
