@@ -17,7 +17,7 @@ if (get_query_var('paged')) {
 $users_per_page = 10; // ToDo: make this a _get variable
 
 // Filters
-$meta_query = array('relation' => 'AND'); // Array of arrays that individually store key/value pairs.
+$meta_query = array('relation' => 'OR'); // Array of arrays that individually store key/value pairs.
 $filter_keys = array(
     'field_5b06cc6d43567' => 'categorie',
 );
