@@ -173,7 +173,7 @@ add_action('plugins_loaded', 'register_relationships_volunteer');
  */    
  function archive_volunteer_template( $page_template ) {
      if ( is_page( 'Vrijwilligers' ) ) {
-         $page_template = plugin_dir_path( __FILE__ ) . '/archive-volunteers.php';
+         $page_template = plugin_dir_path( __FILE__ ) . '/archive-volunteers.blade.php';
      }
      return $page_template;
  }

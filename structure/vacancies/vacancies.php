@@ -204,7 +204,7 @@ add_action('plugins_loaded', 'register_custom_fields_vacancy');
  */    
  function archive_vacancy_template( $page_template ) {
      if ( is_page( 'Vacatures' ) ) {
-         $page_template = plugin_dir_path( __FILE__ ) . '/archive-vacancies.php';
+         $page_template = plugin_dir_path( __FILE__ ) . '/archive-vacancies.blade.php';
      }
      return $page_template;
  }

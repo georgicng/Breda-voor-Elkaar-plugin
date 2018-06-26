@@ -153,7 +153,7 @@ add_action('plugins_loaded', 'register_relationships_organisation');
  */    
  function archive_organisation_template( $page_template ) {
      if ( is_page( 'Organisaties' ) ) {
-         $page_template = plugin_dir_path( __FILE__ ) . '/archive-organisations.php';
+         $page_template = plugin_dir_path( __FILE__ ) . '/archive-organisations.blade.php';
      }
      return $page_template;
  }

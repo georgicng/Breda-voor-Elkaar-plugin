@@ -1,6 +1,9 @@
-<?php /* Template Name: Organisaties */?>
+<?php /* Template Name: Vrijwilligers */?>
 
-<?php //get_header(); ?>
+@extends('layouts.app')
+
+@section('content')
+  @include('partials.page-header')
 
 <?php
 // Pagination
@@ -16,7 +19,7 @@ $users_per_page = 10; // ToDo: make this a _get variable
 // Filters
 $meta_query = array('relation' => 'AND'); // Array of arrays that individually store key/value pairs.
 $filter_keys = array(
-    'categorie',
+    'categorie', // Enter possible filter values here.
 );
 
 // Loop over all filter keys and check if they are set in the _Get variable.
@@ -45,7 +48,7 @@ function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
 // Arguments for out main query
 $args = array(
     // Add filter and pagination arguments here later, and get them from ?= variables with default values.
-    'role' => 'organisation',
+    'role' => 'volunteer',
     'number' => $users_per_page,
     'paged' => $current_page,
     'meta_query' => $meta_query
@@ -71,8 +74,7 @@ if (!empty($user_query->get_results())) {
     }
     numeric_pagination($current_page, $num_pages);
 } else {
-    echo 'Geen organisatie gevonden die aan uw zoekopdracht voldeed.';
+    echo 'Geen vrijwilliger gevonden die aan uw zoekopdracht voldeed.';
 }
 ?>
-
-<?php //get_footer();
+@endsection

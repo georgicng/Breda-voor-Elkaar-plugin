@@ -1,6 +1,9 @@
-<?php /* Template Name: Vacatures */?>
+<?php /* Template Name: Organisaties */?>
 
-<?php //get_header(); ?>
+@extends('layouts.app')
+
+@section('content')
+  @include('partials.page-header')
 
 <?php
 // Pagination
@@ -11,21 +14,35 @@ if (get_query_var('paged')) {
 } else {
     $current_page = 1;
 }
-$posts_per_page = 10; // ToDo: make this a _get variable
+$users_per_page = 10; // ToDo: make this a _get variable
 
 // Filters
 $meta_query = array('relation' => 'AND'); // Array of arrays that individually store key/value pairs.
 $filter_keys = array(
-    'categorie', // Enter possible filter values here.
+    'field_5b06cc6d43567' => 'categorie',
 );
+?>
 
+<div id="archive-filters">
+<?php
 // Loop over all filter keys and check if they are set in the _Get variable.
-foreach($filter_keys as $key){
+foreach($filter_keys as $acf_key => $key){
+    // get the field's settings without attempting to load a value
+    $field = get_field_object($acf_key, false, false);
+
     if(isset($_GET[$key])){
+        $field['value'] = explode(',', $_GET[$key]);
         add_to_meta_query_if_get_exists($key,$_GET[$key],$meta_query);
     }
+    ?>
+    <div class="filter" data-filter="<?php echo $key; ?>">
+    <?php render_field($field); ?>
+    </div>
+    <?php
 }
-
+?>
+</div>
+<?php
 /**
  * Add key, value pair to the post meta filters if it is set.
  */
@@ -45,29 +62,34 @@ function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
 // Arguments for out main query
 $args = array(
     // Add filter and pagination arguments here later, and get them from ?= variables with default values.
-    'post_type' => 'vacancies',
-    'number' => $posts_per_page,
+    'role' => 'organisation',
+    'number' => $users_per_page,
     'paged' => $current_page,
     'meta_query' => $meta_query
 );
 
 // The Query
-$query = new WP_Query($args);
-$posts = $query->posts;
+$user_query = new WP_User_Query($args);
 
 // Totals for pagination
-$total_posts = $query->get_total(); // How many posts we have in total (beyond the current page)
-$num_pages = ceil($total_posts / $posts_per_page); // How many pages of posts we will need
+$total_users = $user_query->get_total(); // How many users we have in total (beyond the current page)
+$num_pages = ceil($total_users / $users_per_page); // How many pages of users we will need
 
-// Post Loop
-if (!empty($posts)) {
-    foreach($posts as $p) {
-        echo '<li> ID: '.$p->ID.'</li>';
+// User Loop
+if (!empty($user_query->get_results())) {
+    foreach ($user_query->get_results() as $user) {
+        ?>
+        <ul>
+            <li> <?php echo $user->ID ?> </li>
+            <li> <?php echo $user->display_name ?> </li>
+            <li> <?php the_field('afbeelding', 'user_' . $user->ID)?> </li>
+        </ul>
+        <?php
     }
     numeric_pagination($current_page, $num_pages);
+    filter_script('organisaties');
 } else {
-    echo 'Geen vacature gevonden die aan uw zoekopdracht voldeed.';
+    echo 'Geen organisatie gevonden die aan uw zoekopdracht voldeed.';
 }
 ?>
-
-<?php //get_footer();
+@endsection

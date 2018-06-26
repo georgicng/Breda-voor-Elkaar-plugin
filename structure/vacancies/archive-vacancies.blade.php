@@ -1,6 +1,9 @@
-<?php /* Template Name: Vrijwilligers */?>
+<?php /* Template Name: Vacatures */?>
 
-<?php //get_header(); ?>
+@extends('layouts.app')
+
+@section('content')
+  @include('partials.page-header')
 
 <?php
 // Pagination
@@ -11,7 +14,7 @@ if (get_query_var('paged')) {
 } else {
     $current_page = 1;
 }
-$users_per_page = 10; // ToDo: make this a _get variable
+$posts_per_page = 10; // ToDo: make this a _get variable
 
 // Filters
 $meta_query = array('relation' => 'AND'); // Array of arrays that individually store key/value pairs.
@@ -45,34 +48,28 @@ function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
 // Arguments for out main query
 $args = array(
     // Add filter and pagination arguments here later, and get them from ?= variables with default values.
-    'role' => 'volunteer',
-    'number' => $users_per_page,
+    'post_type' => 'vacancies',
+    'number' => $posts_per_page,
     'paged' => $current_page,
     'meta_query' => $meta_query
 );
 
 // The Query
-$user_query = new WP_User_Query($args);
+$query = new WP_Query($args);
+$posts = $query->posts;
 
 // Totals for pagination
-$total_users = $user_query->get_total(); // How many users we have in total (beyond the current page)
-$num_pages = ceil($total_users / $users_per_page); // How many pages of users we will need
+$total_posts = $query->get_total(); // How many posts we have in total (beyond the current page)
+$num_pages = ceil($total_posts / $posts_per_page); // How many pages of posts we will need
 
-// User Loop
-if (!empty($user_query->get_results())) {
-    foreach ($user_query->get_results() as $user) {
-        ?>
-        <ul>
-            <li> <?php echo $user->ID ?> </li>
-            <li> <?php echo $user->display_name ?> </li>
-            <li> <?php the_field('afbeelding', 'user_' . $user->ID)?> </li>
-        </ul>
-        <?php
+// Post Loop
+if (!empty($posts)) {
+    foreach($posts as $p) {
+        echo '<li> ID: '.$p->ID.'</li>';
     }
     numeric_pagination($current_page, $num_pages);
 } else {
-    echo 'Geen vrijwilliger gevonden die aan uw zoekopdracht voldeed.';
+    echo 'Geen vacature gevonden die aan uw zoekopdracht voldeed.';
 }
 ?>
-
-<?php //get_footer();
+@endsection
