@@ -83,6 +83,12 @@ if (!empty($user_query->get_results())) {
             <li> <?php echo $user->ID ?> </li>
             <li> <?php echo $user->display_name ?> </li>
             <li> <?php the_field('afbeelding', 'user_' . $user->ID)?> </li>
+            <li> <?php 
+                if(get_field('vacancies', 'user_' . $user->ID) !== null){
+                    echo count(get_field('vacancies', 'user_' . $user->ID));
+                } else{
+                    echo '0';
+                }?> </li>
         </ul>
         <?php
     }
