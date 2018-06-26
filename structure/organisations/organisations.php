@@ -147,3 +147,32 @@ function register_relationships_organisation()
     endif;
 }
 add_action('plugins_loaded', 'register_relationships_organisation');
+
+/**
+ * Create archive page on init.
+ */
+function create_archive_organisation() {
+    $post = array(
+        'comment_status' => 'closed',
+        'ping_status' =>  'closed' ,
+        'post_author' => 1,
+        'post_date' => date('Y-m-d H:i:s'),
+        'post_name' => 'Organisaties',
+        'post_status' => 'publish' ,
+        'post_title' => 'Organisaties',
+        'post_type' => 'page'
+    );
+    wp_insert_post( $post );
+}
+register_activation_hook(__FILE__, 'create_archive_organisation');
+
+/**
+ * Set template for archive page.
+ */    
+ function archive_organisation_template( $page_template ) {
+     if ( is_page( 'Organisaties' ) ) {
+         $page_template = plugin_dir_path( __FILE__ ) . '/archive-organisations.php';
+     }
+     return $page_template;
+ }
+ add_filter( 'page_template', 'archive_organisation_template' );

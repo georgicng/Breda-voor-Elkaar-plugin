@@ -167,3 +167,32 @@ function register_relationships_volunteer()
     endif;
 }
 add_action('plugins_loaded', 'register_relationships_volunteer');
+
+/**
+ * Create archive page on init.
+ */
+function create_archive_volunteer() {
+    $post = array(
+        'comment_status' => 'closed',
+        'ping_status' =>  'closed' ,
+        'post_author' => 1,
+        'post_date' => date('Y-m-d H:i:s'),
+        'post_name' => 'Vrijwilligers',
+        'post_status' => 'publish' ,
+        'post_title' => 'Vrijwilligers',
+        'post_type' => 'page'
+    );
+    wp_insert_post( $post );
+}
+register_activation_hook(__FILE__, 'create_archive_volunteer');
+
+/**
+ * Set template for archive page.
+ */    
+ function archive_volunteer_template( $page_template ) {
+     if ( is_page( 'Vrijwilligers' ) ) {
+         $page_template = plugin_dir_path( __FILE__ ) . '/archive-volunteers.php';
+     }
+     return $page_template;
+ }
+ add_filter( 'page_template', 'archive_volunteer_template' );

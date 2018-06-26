@@ -198,3 +198,32 @@ function register_custom_fields_vacancy() {
     }
 }
 add_action('plugins_loaded', 'register_custom_fields_vacancy');
+
+/**
+ * Create archive page on init.
+ */
+function create_archive_vacancy() {
+    $post = array(
+        'comment_status' => 'closed',
+        'ping_status' =>  'closed' ,
+        'post_author' => 1,
+        'post_date' => date('Y-m-d H:i:s'),
+        'post_name' => 'Vacatures',
+        'post_status' => 'publish' ,
+        'post_title' => 'Vacatures',
+        'post_type' => 'page'
+    );
+    wp_insert_post( $post );
+}
+register_activation_hook(__FILE__, 'create_archive_vacancy');
+
+/**
+ * Set template for archive page.
+ */    
+ function archive_vacancy_template( $page_template ) {
+     if ( is_page( 'Vrijwilligers' ) ) {
+         $page_template = plugin_dir_path( __FILE__ ) . '/archive-vacancies.php';
+     }
+     return $page_template;
+ }
+ add_filter( 'page_template', 'archive_vacancy_template' );
