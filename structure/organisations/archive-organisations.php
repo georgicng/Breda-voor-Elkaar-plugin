@@ -13,11 +13,38 @@ if (get_query_var('paged')) {
 }
 $users_per_page = 3;
 
+// Filters
+$meta_query = array(); // Array of arrays that store key/value pairs.
+$filter_keys = array(
+    'field_5b06cc6d43567', // Categorie 
+    //ToDo: rename keys
+)
+
+// Loop over all filter keys and check if they are set in the _Get variable.
+foreach($filter_keys as $key){
+    add_to_meta_query_if_get_exists($key,$_GET[$key]);
+}
+
+/**
+ * Add key, value pair to the post meta filters if it is set.
+ */
+function add_to_meta_query_if_get_exists($filter_key, $filter_value){
+    if(isset($_GET[$filter_key])){
+        $meta_addition = array(
+			'key' => $filter_key,
+			'value' => $filter_value
+        );
+        array_push($meta_query,$meta_addition);
+    }
+}
+
+// Arguments for out main query
 $args = array(
-    //Add filter and pagination arguments here later, and get them from ?= variables with default values.
+    // Add filter and pagination arguments here later, and get them from ?= variables with default values.
     'role' => 'organisation',
     'number' => $users_per_page,
     'paged' => $current_page,
+    'meta_query' => $meta_query
 );
 
 // The Query
@@ -50,7 +77,7 @@ if (!empty($user_query->get_results())) {
 
 /**
  * Calculate pagination for users.
- * This should end up in functions.php and be re-used in multiple templates, instead of defined at the bottom of the templates itself.
+ * This should end up in breda-voor-elkaar.php and be re-used in multiple templates, instead of defined at the bottom of the templates itself.
  */
 function numeric_pagination($current_page, $num_pages) {
     echo '<div class="pagination">';
