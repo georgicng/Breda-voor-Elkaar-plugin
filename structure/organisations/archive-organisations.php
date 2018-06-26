@@ -11,10 +11,10 @@ if (get_query_var('paged')) {
 } else {
     $current_page = 1;
 }
-$users_per_page = 3;
+$users_per_page = 10; // ToDo: make this a _get variable
 
 // Filters
-$meta_query = array(); // Array of arrays that store key/value pairs.
+$meta_query = array(); // Array of arrays that individually store key/value pairs.
 $filter_keys = array(
     'field_5b06cc6d43567', // Categorie 
     //ToDo: rename keys
