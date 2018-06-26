@@ -18,23 +18,25 @@ $meta_query = array(); // Array of arrays that individually store key/value pair
 $filter_keys = array(
     'field_5b06cc6d43567', // Categorie 
     //ToDo: rename keys
-)
+);
 
 // Loop over all filter keys and check if they are set in the _Get variable.
 foreach($filter_keys as $key){
-    add_to_meta_query_if_get_exists($key,$_GET[$key]);
+    if(isset($_GET[$key])){
+        add_to_meta_query_if_get_exists($key,$_GET[$key],$meta_query);
+    }
 }
 
 /**
  * Add key, value pair to the post meta filters if it is set.
  */
-function add_to_meta_query_if_get_exists($filter_key, $filter_value){
+function add_to_meta_query_if_get_exists($filter_key, $filter_value, $query){
     if(isset($_GET[$filter_key])){
         $meta_addition = array(
 			'key' => $filter_key,
 			'value' => $filter_value
         );
-        array_push($meta_query,$meta_addition);
+        array_push($query,$meta_addition);
     }
 }
 
