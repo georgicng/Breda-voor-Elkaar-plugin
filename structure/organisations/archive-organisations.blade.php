@@ -51,8 +51,8 @@ function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
         $values_to_search = explode(',', $_GET[$filter_key]);
         foreach ($values_to_search as $value) {
             $meta_addition = array(
-                'key' => $filter_key,
-                'value' => $value,
+                'key' => rawurldecode($filter_key),
+                'value' => rawurldecode($value),
                 'compare' => 'LIKE'
             );
             array_push($query,$meta_addition);
