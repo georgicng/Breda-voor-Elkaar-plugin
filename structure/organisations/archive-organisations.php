@@ -14,10 +14,9 @@ if (get_query_var('paged')) {
 $users_per_page = 10; // ToDo: make this a _get variable
 
 // Filters
-$meta_query = array(); // Array of arrays that individually store key/value pairs.
+$meta_query = array('relation' => 'AND'); // Array of arrays that individually store key/value pairs.
 $filter_keys = array(
-    'field_5b06cc6d43567', // Categorie 
-    //ToDo: rename keys
+    'categorie',
 );
 
 // Loop over all filter keys and check if they are set in the _Get variable.
@@ -30,16 +29,19 @@ foreach($filter_keys as $key){
 /**
  * Add key, value pair to the post meta filters if it is set.
  */
-function add_to_meta_query_if_get_exists($filter_key, $filter_value, $query){
+function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
     if(isset($_GET[$filter_key])){
-        $meta_addition = array(
-			'key' => $filter_key,
-			'value' => $filter_value
-        );
-        array_push($query,$meta_addition);
+        $values_to_search = explode(',', $_GET[$filter_key]);
+        foreach ($values_to_search as $value) {
+            $meta_addition = array(
+                'key' => $filter_key,
+                'value' => $value,
+                'compare' => 'LIKE'
+            );
+            array_push($query,$meta_addition);
+        }
     }
 }
-
 // Arguments for out main query
 $args = array(
     // Add filter and pagination arguments here later, and get them from ?= variables with default values.
@@ -49,6 +51,7 @@ $args = array(
     'meta_query' => $meta_query
 );
 
+var_dump($meta_query);
 // The Query
 $user_query = new WP_User_Query($args);
 
