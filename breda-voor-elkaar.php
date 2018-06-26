@@ -164,3 +164,43 @@ function use_acf_filters_in_query( $query ) {
     $query->set('meta_query', $meta_query);
 }
 add_action('pre_get_posts', 'use_acf_filters_in_query', 10, 1);
+
+/**
+ * Output pagination for posts and users.
+ */
+function numeric_pagination($current_page, $num_pages) {
+    echo '<div class="pagination">';
+    $start_number = $current_page - 2;
+    $end_number = $current_page + 2;
+
+    if (($start_number - 1) < 1) {
+        $start_number = 1;
+        $end_number = min($num_pages, $start_number + 4);
+    }
+    
+    if (($end_number + 1) > $num_pages) {
+        $end_number = $num_pages;
+        $start_number = max(1, $num_pages - 4);
+    }
+
+    if ($start_number > 1) {
+        echo " 1 ... ";
+    }
+
+    for ($i = $start_number; $i <= $end_number; $i++) {
+        if ($i === $current_page) {
+            echo '<a href="?page='.$i.'">';
+            echo " [{$i}] ";
+            echo '</a>';
+        } else {
+            echo '<a href="?page='.$i.'">';
+            echo " {$i} ";
+            echo '</a>';
+        }
+    }
+
+    if ($end_number < $num_pages) {
+        echo " ... {$num_pages} ";
+    }
+    echo '</div>';
+}
