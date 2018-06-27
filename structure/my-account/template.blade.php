@@ -12,11 +12,25 @@ if(is_user_logged_in()){
     if($role[0] == 'organisation'){
     ?>
     <ul id="account-menu">
+        <li class="active"><a href="/organisatie-account">Organisatieprofiel</a></li>
         <li><a href="/beheer-vacatures">Beheer vacatures</a></li>
         <li><a href="/nieuwe-vacature">Nieuwe vacature plaatsen</a></li>
         <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
         <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
     </ul>
+    <div id="organisation-profile">
+    <?php $options = array(
+	    'post_id' => 'user_'.$user->ID,
+	    //'field_groups' => array(77),
+	    'form' => true, 
+	    //'return' => add_query_arg( 'updated', 'true', get_permalink() ), 
+	    'html_before_fields' => '',
+	    'html_after_fields' => '',
+	    'submit_value' => 'Update' 
+	);
+	acf_form( $options );
+	?>
+    </div>
     <?php
     } else if($role[0] == 'volunteer'){
     ?>
