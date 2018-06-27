@@ -49,7 +49,7 @@ function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
 $args = array(
     // Add filter and pagination arguments here later, and get them from ?= variables with default values.
     'post_type' => 'vacancies',
-    'number' => $posts_per_page,
+    'posts_per_page' => $posts_per_page,
     'paged' => $current_page,
     'meta_query' => $meta_query
 );
@@ -59,7 +59,7 @@ $query = new WP_Query($args);
 $posts = $query->posts;
 
 // Totals for pagination
-$total_posts = $query->get_total(); // How many posts we have in total (beyond the current page)
+$total_posts = $query->found_posts; // How many posts we have in total (beyond the current page)
 $num_pages = ceil($total_posts / $posts_per_page); // How many pages of posts we will need
 
 // Post Loop
