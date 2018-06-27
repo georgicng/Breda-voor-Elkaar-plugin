@@ -209,4 +209,3 @@ add_action('plugins_loaded', 'register_custom_fields_vacancy');
      return $page_template;
  }
  add_filter( 'page_template', 'archive_vacancy_template' );
- 
