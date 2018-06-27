@@ -34,14 +34,16 @@ class Breda_Voor_Elkaar_Activator {
          */
         add_role('organisation', 'Organisatie', ['read' => true, 'level_0' => true]);
         add_role('volunteer', 'Vrijwilliger', ['read' => true, 'level_0' => true]);
+        
         create_page('Organisaties');
         create_page('Vrijwilligers');
         create_page('Vacatures');
+        create_page('Mijn Account');
     }
 }
 
 /**
- * Create archive page on init.
+ * Create a WordPress page.
  */
 function create_page($name) {
     $post = array(
