@@ -110,8 +110,6 @@ function change_template_single_author($template) {
 }
 add_filter('template_include', 'change_template_single_author');
 
-add_action('acf/init', 'my_acf_init');
-
 /**
  * Output pagination for posts and users.
  */
