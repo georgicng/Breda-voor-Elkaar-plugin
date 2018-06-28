@@ -75,7 +75,7 @@ function register_custom_fields_volunteer()
                     'key' => 'field_5c05966d1f567',
                     'label' => 'ervaring',
                     'name' => 'ervaring',
-                    'type' => 'select',
+                    'type' => 'checkbox',
                     'choices' => [
                         '0 tot 2 jaar' => '0 tot 2 jaar',
                         '3 tot 5 jaar' => '3 tot 5 jaar',
@@ -96,7 +96,7 @@ function register_custom_fields_volunteer()
                     'key' => 'field_5c05963d1f567',
                     'label' => 'leeftijd',
                     'name' => 'leeftijd',
-                    'type' => 'select',
+                    'type' => 'checkbox',
                     'choices' => [
                         'Jonger dan 18 jaar' => 'Jonger dan 18 jaar',
                         '18 tot 22 jaar' => '18 tot 22 jaar',
@@ -116,7 +116,7 @@ function register_custom_fields_volunteer()
                     'key' => 'field_5b05966d1f567',
                     'label' => 'opleiding',
                     'name' => 'opleiding',
-                    'type' => 'select',
+                    'type' => 'checkbox',
                     'choices' => [
                         'Voortgezet onderwijs' => 'Voortgezet onderwijs',
                         'MBO' => 'MBO',
