@@ -17,6 +17,7 @@ function create_post_type_vacancy() {
             'public' => true,
             'has_archive' => true,
             'taxonomies' => ['category'],
+            'rewrite' => array( 'slug' => 'vacatures' ),
         ]
     );
 }
