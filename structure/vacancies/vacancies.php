@@ -197,7 +197,7 @@ function register_custom_fields_vacancy() {
         ]);
     }
 }
-add_action('plugins_loaded', 'register_custom_fields_vacancy');
+add_action('acf/init', 'register_custom_fields_vacancy');
 
 /**
  * Set template for archive page.
