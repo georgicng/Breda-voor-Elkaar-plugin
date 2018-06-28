@@ -21,9 +21,7 @@ if(is_user_logged_in()){
     <div id="organisation-profile">
     <?php $options = array(
 	    'post_id' => 'user_'.$user->ID,
-	    //'field_groups' => array(77),
 	    'form' => true, 
-	    //'return' => add_query_arg( 'updated', 'true', get_permalink() ), 
 	    'html_before_fields' => '',
 	    'html_after_fields' => '',
 	    'submit_value' => 'Update' 
@@ -38,6 +36,17 @@ if(is_user_logged_in()){
         <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
         <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
     </ul>
+    <div id="volunteer-profile">
+    <?php $options = array(
+	    'post_id' => 'user_'.$user->ID,
+	    'form' => true, 
+	    'html_before_fields' => '',
+	    'html_after_fields' => '',
+	    'submit_value' => 'Update' 
+	);
+	acf_form( $options );
+	?>
+    </div>
     <?php
     } else{
         echo 'Uw account is geen vrijwilliger of organisatie.';
