@@ -150,6 +150,10 @@ function numeric_pagination($current_page, $num_pages) {
     echo '</div>';
 }
 
+/**
+ * Script to add filter variables to the url and refresh.
+ * Originally taken from ACF documentation.
+ */
 function filter_script($page){
     ?>
 
