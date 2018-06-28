@@ -198,3 +198,14 @@ function register_custom_fields_vacancy() {
     }
 }
 add_action('plugins_loaded', 'register_custom_fields_vacancy');
+
+/**
+ * Set template for archive page.
+ */    
+ function archive_vacancy_template( $page_template ) {
+     if ( is_page( 'Vacatures' ) ) {
+         $page_template = plugin_dir_path( __FILE__ ) . '/archive-vacancies.blade.php';
+     }
+     return $page_template;
+ }
+ add_filter( 'page_template', 'archive_vacancy_template' );

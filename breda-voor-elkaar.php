@@ -89,23 +89,104 @@ function change_author_slug() {
 }
 
 /**
- * Change author template
+ * Change author template single
  *
  * @param $template represents the template as it came in through the template_include hook
  */
-function change_template_author($template) {
+function change_template_single_author($template) {
     if (is_author()) {
         $author_id = get_query_var('author');
         $author_meta = get_userdata($author_id);
         $author_roles = $author_meta->roles;
         if (in_array('organisation', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/organisations/template.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/organisations/single.php';
         } elseif (in_array('volunteer', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/template.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/single.php';
         } else {
             echo 'user was not an organisation nor a volunteer';
         }
     }
     return $template;
 }
-add_filter('template_include', 'change_template_author');
+add_filter('template_include', 'change_template_single_author');
+
+/**
+ * Output pagination for posts and users.
+ */
+function numeric_pagination($current_page, $num_pages) {
+    echo '<div class="pagination">';
+    $start_number = $current_page - 2;
+    $end_number = $current_page + 2;
+
+    if (($start_number - 1) < 1) {
+        $start_number = 1;
+        $end_number = min($num_pages, $start_number + 4);
+    }
+    
+    if (($end_number + 1) > $num_pages) {
+        $end_number = $num_pages;
+        $start_number = max(1, $num_pages - 4);
+    }
+
+    if ($start_number > 1) {
+        echo " 1 ... ";
+    }
+
+    for ($i = $start_number; $i <= $end_number; $i++) {
+        if ($i === $current_page) {
+            echo '<a href="?page='.$i.'">';
+            echo " [{$i}] ";
+            echo '</a>';
+        } else {
+            echo '<a href="?page='.$i.'">';
+            echo " {$i} ";
+            echo '</a>';
+        }
+    }
+
+    if ($end_number < $num_pages) {
+        echo " ... {$num_pages} ";
+    }
+    echo '</div>';
+}
+
+function filter_script($page){
+    ?>
+
+<script type="text/javascript">
+(function($) {
+    // change
+    $('#archive-filters').on('change', 'input[type="checkbox"]', function(){
+        // vars
+        var url = '<?php echo home_url($page); ?>';
+            args = {};
+        // loop over filters
+        $('#archive-filters .filter').each(function(){
+            // vars
+            var filter = $(this).data('filter'),
+                vals = [];
+            // find checked inputs
+            $(this).find('input:checked').each(function(){
+                vals.push( $(this).val() );
+            });
+            // append to args
+            args[ filter ] = vals.join(',');
+        });
+        // update url
+        url += '?';
+        // loop over args
+        $.each(args, function( name, value ){
+            if(value !== ""){
+                url += name + '=' + value + '&';
+            }
+        });
+        // remove last &
+        url = url.slice(0, -1);
+        // reload page
+        window.location.replace( url );
+    });
+})(jQuery);
+</script>
+
+    <?php
+}
