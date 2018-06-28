@@ -46,15 +46,17 @@ class Breda_Voor_Elkaar_Activator {
  * Create a WordPress page.
  */
 function create_page($name) {
-    $post = array(
-        'comment_status' => 'closed',
-        'ping_status' =>  'closed' ,
-        'post_author' => 1,
-        'post_date' => date('Y-m-d H:i:s'),
-        'post_name' => $name,
-        'post_status' => 'publish' ,
-        'post_title' => $name,
-        'post_type' => 'page'
-    );
-    wp_insert_post( $post ); 
+    if(get_page_by_title($name) == NULL){
+        $post = array(
+            'comment_status' => 'closed',
+            'ping_status' =>  'closed' ,
+            'post_author' => 1,
+            'post_date' => date('Y-m-d H:i:s'),
+            'post_name' => $name,
+            'post_status' => 'publish' ,
+            'post_title' => $name,
+            'post_type' => 'page'
+        );
+        wp_insert_post( $post ); 
+    }
 }
