@@ -1,5 +1,7 @@
 <?php /* Template Name: Mijn Account */?>
 
+<?php acf_form_head(); ?>
+
 @extends('layouts.app')
 
 @section('content')
