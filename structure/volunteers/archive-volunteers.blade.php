@@ -71,6 +71,18 @@ $args = array(
     'meta_query' => $meta_query
 );
 
+// Add search term to wp-query if it is set in the url.
+if(isset($_GET['search'])){
+    $search_term = $wpdb->esc_like($_GET['search']);
+    $args['search'] = '*'.$search_term.'*';
+    $args['search_columns'] = array(
+        'user_login',
+        'user_nicename',
+        'user_email',
+        'user_url',
+    );
+}
+
 // The Query
 $user_query = new WP_User_Query($args);
 

@@ -6,6 +6,8 @@
   @include('partials.page-header')
 
 <?php
+global $wpdb;
+
 // Pagination
 if (get_query_var('paged')) {
     $current_page = get_query_var('paged');
@@ -43,9 +45,7 @@ foreach($filter_keys as $acf_key => $key){
 ?>
 </div>
 <?php
-/**
- * Add key, value pair to the post meta filters if it is set.
- */
+// Add key, value pair to the post meta filters if it is set.
 function add_to_meta_query_if_get_exists($filter_key, $filter_value, &$query){
     if(isset($_GET[$filter_key])){
         $values_to_search = explode(',', $_GET[$filter_key]);
@@ -67,6 +67,18 @@ $args = array(
     'paged' => $current_page,
     'meta_query' => $meta_query
 );
+
+// Add search term to wp-query if it is set in the url.
+if(isset($_GET['search'])){
+    $search_term = $wpdb->esc_like($_GET['search']);
+    $args['search'] = '*'.$search_term.'*';
+    $args['search_columns'] = array(
+        'user_login',
+        'user_nicename',
+        'user_email',
+        'user_url',
+    );
+}
 
 // The Query
 $user_query = new WP_User_Query($args);

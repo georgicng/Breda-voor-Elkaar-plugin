@@ -7,9 +7,9 @@
  * Add Custom Fields on plugin init.
  */
 function register_custom_fields_organisation() {
-    if (function_exists('register_field_group')) {
-        register_field_group([
-            'id' => 'acf_organisations',
+    if (function_exists('acf_add_local_field_group')) {
+        acf_add_local_field_group([
+            'key' => 'acf_organisations',
             'title' => 'Organisations',
             'fields' => [
                 [
@@ -106,7 +106,7 @@ function register_custom_fields_organisation() {
         ]);
     }
 }
-add_action('plugins_loaded', 'register_custom_fields_organisation');
+add_action('acf/init', 'register_custom_fields_organisation');
 
 /**
  * Register Custom Relationship Fields on init.

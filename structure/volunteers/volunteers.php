@@ -15,9 +15,9 @@ add_filter('pre_option_default_role', function ($default_role) {
  */
 function register_custom_fields_volunteer()
 {
-    if (function_exists('register_field_group')) {
-        register_field_group([
-            'id' => 'acf_vrijwilliger',
+    if (function_exists('acf_add_local_field_group')) {
+        acf_add_local_field_group([
+            'key' => 'acf_vrijwilliger',
             'title' => 'Vrijwilliger Custom Fields',
             'fields' => [
                 [
@@ -75,7 +75,7 @@ function register_custom_fields_volunteer()
                     'key' => 'field_5c05966d1f567',
                     'label' => 'ervaring',
                     'name' => 'ervaring',
-                    'type' => 'select',
+                    'type' => 'checkbox',
                     'choices' => [
                         '0 tot 2 jaar' => '0 tot 2 jaar',
                         '3 tot 5 jaar' => '3 tot 5 jaar',
@@ -96,7 +96,7 @@ function register_custom_fields_volunteer()
                     'key' => 'field_5c05963d1f567',
                     'label' => 'leeftijd',
                     'name' => 'leeftijd',
-                    'type' => 'select',
+                    'type' => 'checkbox',
                     'choices' => [
                         'Jonger dan 18 jaar' => 'Jonger dan 18 jaar',
                         '18 tot 22 jaar' => '18 tot 22 jaar',
@@ -116,7 +116,7 @@ function register_custom_fields_volunteer()
                     'key' => 'field_5b05966d1f567',
                     'label' => 'opleiding',
                     'name' => 'opleiding',
-                    'type' => 'select',
+                    'type' => 'checkbox',
                     'choices' => [
                         'Voortgezet onderwijs' => 'Voortgezet onderwijs',
                         'MBO' => 'MBO',
@@ -159,7 +159,7 @@ function register_custom_fields_volunteer()
         ]);
     }
 }
-add_action('plugins_loaded', 'register_custom_fields_volunteer');
+add_action('acf/init', 'register_custom_fields_volunteer');
 
 /**
  * Register Custom Relationship Fields on init.

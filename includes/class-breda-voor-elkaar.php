@@ -135,6 +135,11 @@ class Breda_Voor_Elkaar {
         require_once plugin_dir_path(dirname(__FILE__)) . 'structure/volunteers/volunteers.php';
 
         /**
+         * The class responsible for the custom my-account functionality.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'structure/my-account/my-account.php';
+
+        /**
          * The ACF plugin dependency, which is used to add fields to the above post and user types
          */
         if (!class_exists('acf')) {
