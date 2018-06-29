@@ -49,15 +49,27 @@ if(is_user_logged_in()){
         <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
     </ul>
     <div id="volunteer-profile">
+	<form id="acf-form" class="acf-form" action="" method="post">
     <?php $options = array(
 	    'post_id' => 'user_'.$user->ID,
-	    'form' => true, 
+        'form' => false, 
+        'fields' => array(
+            'field_5b06xx6d43567', // Category
+            'field_5c05966d1f567', // Experience
+            'field_5c05963d1f567', // Age
+            'field_5b05966d1f567', // Education
+            'field_5b0596ba1f568', // CV
+            'field_5b0596121f564', // Address
+        ),
 	    'html_before_fields' => '',
 	    'html_after_fields' => '',
-	    'submit_value' => 'Update' 
 	);
 	acf_form( $options );
 	?>
+    <div class="acf-form-submit">
+        <input type="submit" class="acf-button button button-primary button-large" value="Update">			<span class="acf-spinner"></span>			
+    </div>
+    </form>
     </div>
     <?php
     } else{
