@@ -15,9 +15,9 @@ add_filter('pre_option_default_role', function ($default_role) {
  */
 function register_custom_fields_volunteer()
 {
-    if (function_exists('register_field_group')) {
-        register_field_group([
-            'id' => 'acf_vrijwilliger',
+    if (function_exists('acf_add_local_field_group')) {
+        acf_add_local_field_group([
+            'key' => 'acf_vrijwilliger',
             'title' => 'Vrijwilliger Custom Fields',
             'fields' => [
                 [
@@ -159,7 +159,7 @@ function register_custom_fields_volunteer()
         ]);
     }
 }
-add_action('plugins_loaded', 'register_custom_fields_volunteer');
+add_action('acf/init', 'register_custom_fields_volunteer');
 
 /**
  * Register Custom Relationship Fields on init.
