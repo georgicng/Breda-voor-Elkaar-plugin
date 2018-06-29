@@ -22,7 +22,7 @@ function register_custom_fields_volunteer()
             'fields' => [
                 [
                     'key' => 'field_5b0596121f564',
-                    'label' => 'adres',
+                    'label' => 'Adres',
                     'name' => 'adres',
                     'type' => 'google_map',
                     'center_lat' => '51.5598461',
@@ -73,7 +73,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5c05966d1f567',
-                    'label' => 'ervaring',
+                    'label' => 'Ervaring',
                     'name' => 'ervaring',
                     'type' => 'checkbox',
                     'choices' => [
@@ -94,7 +94,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5c05963d1f567',
-                    'label' => 'leeftijd',
+                    'label' => 'Leeftijd',
                     'name' => 'leeftijd',
                     'type' => 'checkbox',
                     'choices' => [
@@ -114,7 +114,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5b05966d1f567',
-                    'label' => 'opleiding',
+                    'label' => 'Opleiding',
                     'name' => 'opleiding',
                     'type' => 'checkbox',
                     'choices' => [
@@ -131,7 +131,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5b0596ba1f568',
-                    'label' => 'cv',
+                    'label' => 'CV',
                     'name' => 'cv',
                     'type' => 'file',
                     'save_format' => 'url',
