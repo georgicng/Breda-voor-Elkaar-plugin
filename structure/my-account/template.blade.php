@@ -1,5 +1,7 @@
 <?php /* Template Name: Mijn Account */?>
 
+<?php acf_form_head() ?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -19,15 +21,25 @@ if(is_user_logged_in()){
         <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
     </ul>
     <div id="organisation-profile">
+	<form id="acf-form" class="acf-form" action="" method="post">
     <?php $options = array(
 	    'post_id' => 'user_'.$user->ID,
-	    'form' => true, 
+        'form' => false, 
+        'fields' => array(
+            'field_5b06cc6d43567', // Category
+            'field_5b06cc8f43568', // Phone number
+            'field_5b06ccef43569', // Image
+            'field_5b06cc0343564', // Address
+        ),
 	    'html_before_fields' => '',
 	    'html_after_fields' => '',
-	    'submit_value' => 'Update' 
 	);
 	acf_form( $options );
 	?>
+    <div class="acf-form-submit">
+        <input type="submit" class="acf-button button button-primary button-large" value="Update">			<span class="acf-spinner"></span>			
+    </div>
+    </form>
     </div>
     <?php
     } else if($role[0] == 'volunteer'){
