@@ -8,18 +8,15 @@
   @include('partials.page-header')
 
 <?php
+    my_account_menu();
+?>
+
+<?php
 if(is_user_logged_in()){
     $user = wp_get_current_user();
     $role = ( array ) $user->roles;
     if($role[0] == 'organisation'){
     ?>
-    <ul id="account-menu">
-        <li class="active"><a href="/organisatie-account">Organisatieprofiel</a></li>
-        <li><a href="/beheer-vacatures">Beheer vacatures</a></li>
-        <li><a href="/nieuwe-vacature">Nieuwe vacature plaatsen</a></li>
-        <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
-        <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
-    </ul>
     <div id="organisation-profile">
 	<form id="acf-form" class="acf-form" action="" method="post">
     <?php $options = array(
@@ -44,10 +41,6 @@ if(is_user_logged_in()){
     <?php
     } else if($role[0] == 'volunteer'){
     ?>
-    <ul id="account-menu">
-        <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
-        <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
-    </ul>
     <div id="volunteer-profile">
 	<form id="acf-form" class="acf-form" action="" method="post">
     <?php $options = array(
