@@ -37,6 +37,8 @@ foreach($filter_keys as $acf_key => $key){
     if(isset($_GET[$key])){
         $field['value'] = explode(',', $_GET[$key]);
         add_to_meta_query_if_get_exists($key,$_GET[$key],$meta_query);
+    } else{
+        $field['value'] = array();
     }
     ?>
     <div class="filter" data-filter="<?php echo $key; ?>">
