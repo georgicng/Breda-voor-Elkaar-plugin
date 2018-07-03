@@ -69,6 +69,7 @@ function my_account_menu(){
         } else if($role[0] == 'volunteer'){
         ?>
         <ul id="account-menu">
+            <li><a href="/favorieten">Favorieten</a></li>
             <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
             <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
         </ul>

@@ -21,15 +21,13 @@ if(is_user_logged_in()){
     <?php
     $posts = get_field('favorites', 'user_' . $user->ID);
     if ($posts){ ?>
-        <li>
-            <ul>
-            <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT) ?>
-                    <li>
-                        Favorited: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
-                    </li>
-            <?php } ?>
-            </ul>
-        </li>
+        <ul>
+        <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT) ?>
+                <li>
+                    Favorited: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
+                </li>
+        <?php } ?>
+        </ul>
     <?php }
     ?>
     </div>
