@@ -34,7 +34,7 @@ if(is_user_logged_in()){
 	acf_form( $options );
 	?>
     <div class="acf-form-submit">
-        <input type="submit" class="acf-button button button-primary button-large" value="Update">			<span class="acf-spinner"></span>			
+        <input type="submit" class="acf-button button button-primary button-large" value="Update"><span class="acf-spinner"></span>			
     </div>
     </form>
     </div>

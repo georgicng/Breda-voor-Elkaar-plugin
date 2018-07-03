@@ -211,3 +211,13 @@ add_action('acf/init', 'register_custom_fields_vacancy');
  }
  add_filter( 'archive_template', 'archive_vacancy_template' );
  
+/**
+ * Set template for single page.
+ */    
+function single_vacancy_template( $page_template ) {
+    if ( is_singular( 'vacancies' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/single.php';
+    }
+    return $page_template;
+ }
+ add_filter( 'single_template', 'single_vacancy_template' );

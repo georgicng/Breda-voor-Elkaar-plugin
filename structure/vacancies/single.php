@@ -43,6 +43,9 @@ if (have_posts()) {
                 Plaatsingsdatum: <?php echo date("d M Y", strtotime(get_the_date())); ?>
             </li>
             <li>
+                Organisatie: <?php echo '<a href="'.get_author_posts_url(get_the_author_meta('ID')).'">'.get_the_author().'</a>' ?>
+            </li>
+            <li>
                 Vacature Overzicht: <?php echo strip_tags(get_the_content()); ?>
             </li>
             <ul>

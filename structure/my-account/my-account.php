@@ -65,22 +65,3 @@ function my_account_menu(){
         echo 'Je moet ingelogd zijn om deze pagina te bekijken.';
     }
 }
-
-// Add relationship on new vacancy to the creator.
-function add_vacancy_organisation_relation($post_id) {
-	// bail early if not a vacancy post
-	if( get_post_type($post_id) !== 'vacancy' ) {
-		return;
-	}
-	// bail early if editing in admin
-	if( is_admin() ) {
-		return;
-	}
-	
-	// vars
-	$post = get_post( $post_id );
-	
-	// ToDo: check who posted this and add them to the relation.
-	
-}
-add_action('acf/save_post', 'add_vacancy_organisation_relation');

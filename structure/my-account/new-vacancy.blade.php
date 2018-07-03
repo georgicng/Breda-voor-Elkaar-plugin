@@ -31,7 +31,7 @@ if(is_user_logged_in()){
             'field_5b06da1440f4e', // Compensation
         ),
 		'new_post'		=> array(
-			'post_type'		=> 'vacancy',
+			'post_type'		=> 'vacancies',
 			'post_status'	=> 'publish' // You could change the status to a custom review status here
 		)
 	);
