@@ -173,8 +173,36 @@ function register_relationships_volunteer()
             'fields' => array(
                 array(
                     'key' => 'field_5b0fe6fd5dfc7',
-                    'label' => 'Applied',
+                    'label' => 'Reacties',
                     'name' => 'applied',
+                    'type' => 'relationship',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'post_type' => array(
+                        0 => 'vacancies',
+                    ),
+                    'taxonomy' => array(
+                    ),
+                    'filters' => array(
+                        0 => 'search',
+                        1 => 'post_type',
+                        2 => 'taxonomy',
+                    ),
+                    'elements' => '',
+                    'min' => '',
+                    'max' => '',
+                    'return_format' => 'object',
+                ),
+                array(
+                    'key' => 'field_5b0frsad5dfc7',
+                    'label' => 'Favorieten',
+                    'name' => 'favorites',
                     'type' => 'relationship',
                     'instructions' => '',
                     'required' => 0,

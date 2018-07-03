@@ -35,6 +35,17 @@ function new_vacancy_template( $page_template ) {
     return $page_template;
 }
 add_filter( 'page_template', 'new_vacancy_template' );
+
+/**
+ * Set template for favorites page.
+ */    
+function favorites_template( $page_template ) {
+    if ( is_page( 'Favorieten' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/favorites.blade.php';
+    }
+    return $page_template;
+}
+add_filter( 'page_template', 'favorites_template' );
  
 /**
  * Output the my account menu.

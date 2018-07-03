@@ -62,7 +62,7 @@ if ($posts){ ?>
         <?php } ?>
         </ul>
     </li>
-    <?php }
+<?php }
 ?>
 
 <?
