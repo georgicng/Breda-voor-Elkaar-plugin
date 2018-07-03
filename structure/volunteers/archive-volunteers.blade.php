@@ -109,7 +109,9 @@ if (!empty($user_query->get_results())) {
         ?>
         <ul>
             <li> <?php echo $user->ID ?> </li>
+            <a href="<?php echo get_author_posts_url($user->ID); ?>">
             <li> <?php echo $user->display_name ?> </li>
+            </a>
         </ul>
         <?php
     }

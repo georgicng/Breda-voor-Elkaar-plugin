@@ -100,7 +100,7 @@ $num_pages = ceil($total_posts / $posts_per_page); // How many pages of posts we
 // Post Loop
 if (!empty($posts)) {
     foreach($posts as $p) {
-        echo '<li> ID: '.$p->ID.'</li>';
+        echo '<a href="'.get_post_permalink($p->ID).'"><li> ID: '.$p->ID.'</li></a>';
     }
     numeric_pagination($current_page, $num_pages);
 } else {
