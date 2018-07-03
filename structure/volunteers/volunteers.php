@@ -174,7 +174,7 @@ function register_relationships_volunteer()
                 array(
                     'key' => 'field_5b0fe6fd5dfc7',
                     'label' => 'Reacties',
-                    'name' => 'applied',
+                    'name' => 'applications',
                     'type' => 'relationship',
                     'instructions' => '',
                     'required' => 0,

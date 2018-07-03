@@ -4,48 +4,23 @@
  */
 
 /**
- * Set template for my-account page.
+ * Set templates for my-account pages.
  */    
 function my_account_template( $page_template ) {
     if ( is_page( 'Mijn Account' ) ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/template.blade.php';
+    } else if ( is_page( 'Wijzig Wachtwoord' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/change-password.blade.php';
+    } else if ( is_page( 'Nieuwe Vacature' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/new-vacancy.blade.php';
+    } else if ( is_page( 'Favorieten' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/favorites.blade.php';
+    } else if ( is_page( 'Reacties' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/applications.blade.php';
     }
     return $page_template;
 }
 add_filter( 'page_template', 'my_account_template' );
-
-/**
- * Set template for change-password page.
- */    
-function change_password_template( $page_template ) {
-    if ( is_page( 'Wijzig Wachtwoord' ) ) {
-        $page_template = plugin_dir_path( __FILE__ ) . '/change-password.blade.php';
-    }
-    return $page_template;
-}
-add_filter( 'page_template', 'change_password_template' );
-
-/**
- * Set template for new-vacancy page.
- */    
-function new_vacancy_template( $page_template ) {
-    if ( is_page( 'Nieuwe Vacature' ) ) {
-        $page_template = plugin_dir_path( __FILE__ ) . '/new-vacancy.blade.php';
-    }
-    return $page_template;
-}
-add_filter( 'page_template', 'new_vacancy_template' );
-
-/**
- * Set template for favorites page.
- */    
-function favorites_template( $page_template ) {
-    if ( is_page( 'Favorieten' ) ) {
-        $page_template = plugin_dir_path( __FILE__ ) . '/favorites.blade.php';
-    }
-    return $page_template;
-}
-add_filter( 'page_template', 'favorites_template' );
  
 /**
  * Output the my account menu.
