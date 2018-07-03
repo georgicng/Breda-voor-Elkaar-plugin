@@ -99,9 +99,9 @@ function change_template_single_author($template) {
         $author_meta = get_userdata($author_id);
         $author_roles = $author_meta->roles;
         if (in_array('organisation', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/organisations/single.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/organisations/single.blade.php';
         } elseif (in_array('volunteer', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/single.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/single.blade.php';
         } else {
             echo 'user was not an organisation nor a volunteer';
         }

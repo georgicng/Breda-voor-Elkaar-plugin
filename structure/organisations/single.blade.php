@@ -1,17 +1,16 @@
-<?php //get_header(); ?>
+@extends('layouts.app')
+
+@section('content')
+  @include('partials.page-header')
 
 <?php
 $ID = get_queried_object()->ID;
 $usermeta = get_user_meta($ID);
 $userdata = get_userdata($ID);
-?>
 
-<!-- Body content -->
-
-<?php
-    global $post; 
-    $post = get_post( $ID, OBJECT );
-    setup_postdata( $post );
+global $post; 
+$post = get_post( $ID, OBJECT );
+setup_postdata( $post );
 ?>
     <li>
         ID: <?php echo $ID; ?>
@@ -66,7 +65,4 @@ $userdata = get_userdata($ID);
 <?
 wp_reset_postdata();
 ?>
-
-<!-- End body content -->
-
-<?php //get_footer(); ?>
+@endsection

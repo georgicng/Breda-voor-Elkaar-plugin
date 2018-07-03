@@ -1,5 +1,3 @@
-<?php /* Template Name: Vacatures */?>
-
 @extends('layouts.app')
 
 @section('content')

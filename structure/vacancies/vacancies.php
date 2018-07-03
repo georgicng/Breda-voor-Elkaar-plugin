@@ -216,7 +216,7 @@ add_action('acf/init', 'register_custom_fields_vacancy');
  */    
 function single_vacancy_template( $page_template ) {
     if ( is_singular( 'vacancies' ) ) {
-        $page_template = plugin_dir_path( __FILE__ ) . '/single.php';
+        $page_template = plugin_dir_path( __FILE__ ) . '/single.blade.php';
     }
     return $page_template;
  }

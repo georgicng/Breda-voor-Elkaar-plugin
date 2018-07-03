@@ -1,4 +1,7 @@
-<?php //get_header(); ?>
+@extends('layouts.app')
+
+@section('content')
+  @include('partials.page-header')
 
 <?php
 // Query posts for a relationship value.
@@ -65,5 +68,4 @@ if (have_posts()) {
     }
 }
 ?>
-
-<?php //get_footer(); ?>
+@endsection
