@@ -68,4 +68,31 @@ if (have_posts()) {
     }
 }
 ?>
+
+<?php
+// Handle form received
+if(isset($_POST['Favoriet'])){ //check if form was submitted
+    $user_id = $_POST['user_id']; //get usedID
+    $post_id = $_POST['post_id']; //get usedID
+    $current_array = get_field('field_5b0frsad5dfc7','user_'.$user_id);
+    array_push($current_array,$post_id);
+    if(!in_array($post_id,$current_array)){
+        update_field('field_5b0frsad5dfc7', $current_array, 'user_'.$user_id);
+    }
+}
+
+// Display form
+$user = wp_get_current_user();
+$role = ( array ) $user->roles;
+global $post;
+if($role[0] == 'volunteer'){
+    ?>
+    <form method="post">
+    <input type="hidden" name="user_id" value="<?php echo $user->ID ?>">
+    <input type="hidden" name="post_id" value="<?php echo $post->ID?>">
+    <input type="submit" name="Favoriet" value="Favoriet">
+    </form>
+    <?
+}
+?>
 @endsection
