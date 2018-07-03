@@ -11,13 +11,17 @@ function my_account_template( $page_template ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/template.blade.php';
     } else if ( is_page( 'Wijzig Wachtwoord' ) ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/change-password.blade.php';
+    } else if ( is_page( 'Beheer Vacatures' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/manage-vacancies.blade.php';
     } else if ( is_page( 'Nieuwe Vacature' ) ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/new-vacancy.blade.php';
+    } else if ( is_page( 'Bewerk Vacature' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/edit-vacancy.blade.php';
     } else if ( is_page( 'Favorieten' ) ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/favorites.blade.php';
     } else if ( is_page( 'Reacties' ) ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/applications.blade.php';
-    }
+    } 
     return $page_template;
 }
 add_filter( 'page_template', 'my_account_template' );
@@ -35,7 +39,6 @@ function my_account_menu(){
         ?>
         <ul id="account-menu">
             <li><a href="/mijn-account">Profiel</a></li>
-            <li><a href="/organisatie-account">Organisatieprofiel</a></li>
             <li><a href="/beheer-vacatures">Beheer vacatures</a></li>
             <li><a href="/nieuwe-vacature">Nieuwe vacature plaatsen</a></li>
             <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
