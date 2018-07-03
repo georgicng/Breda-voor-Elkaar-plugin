@@ -15,6 +15,7 @@ function create_post_type_vacancy() {
                 'singular_name' => __('Vacancy'),
             ],
             'public' => true,
+            'has_archive' => true,
             'rewrite' => array( 'slug' => 'vacatures' ),
         ]
     );
