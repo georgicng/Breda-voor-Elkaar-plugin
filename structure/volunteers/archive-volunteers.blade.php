@@ -6,6 +6,14 @@
   @include('partials.page-header')
 
 <?php
+// Start session to save posts per page
+if (!session_id()) {
+    session_start();
+}
+if(isset($_GET['nr'])){
+    $_SESSION['nr'] = $_GET['nr'];
+}
+
 // Pagination
 if (get_query_var('paged')) {
     $current_page = get_query_var('paged');
@@ -14,7 +22,10 @@ if (get_query_var('paged')) {
 } else {
     $current_page = 1;
 }
-$users_per_page = 10; // ToDo: make this a _get variable
+$users_per_page = 10;
+if(isset($_SESSION['nr'])){
+    $users_per_page = $_SESSION['nr'];
+}
 
 // Filters
 $meta_query = array('relation' => 'OR'); // Array of arrays that individually store key/value pairs.
