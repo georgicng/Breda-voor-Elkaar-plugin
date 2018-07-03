@@ -34,7 +34,8 @@ function my_account_menu(){
         if($role[0] == 'organisation'){
         ?>
         <ul id="account-menu">
-            <li class="active"><a href="/organisatie-account">Organisatieprofiel</a></li>
+            <li><a href="/mijn-acccount">Profiel</a></li>
+            <li><a href="/organisatie-account">Organisatieprofiel</a></li>
             <li><a href="/beheer-vacatures">Beheer vacatures</a></li>
             <li><a href="/nieuwe-vacature">Nieuwe vacature plaatsen</a></li>
             <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
@@ -44,6 +45,8 @@ function my_account_menu(){
         } else if($role[0] == 'volunteer'){
         ?>
         <ul id="account-menu">
+            <li><a href="/mijn-acccount">Profiel</a></li>
+            <li><a href="/reacties">Reacties</a></li>
             <li><a href="/favorieten">Favorieten</a></li>
             <li><a href="/wijzig-wachtwoord">Wijzig wachtwoord</a></li>
             <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
