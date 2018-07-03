@@ -17,7 +17,7 @@ if(is_user_logged_in()){
     $user_id = $user->ID;  
     $meta = get_user_meta($user_id, 'profile', true);
     $output='';
-    if(isset($_POST['changepass'] && isset($_POST['opass'])){
+    if(isset($_POST['changepass']) && isset($_POST['opass'])){
         if(wp_check_password($_POST['opass'], $user->data->user_pass,  $user->ID)){
             if($_POST['npass']!=$_POST['cpass']){
                 $output='Uw wachtwoorden kwamen niet overeen';    
