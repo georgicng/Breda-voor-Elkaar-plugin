@@ -29,6 +29,9 @@ if(is_user_logged_in()){
                 $password=$_POST['npass'];
               }
               wp_set_password( $password, $user_id );
+              wp_set_auth_cookie($user->ID);
+              wp_set_current_user($user->ID);
+              do_action('wp_login', $user->user_login, $user);
               $output='Uw wachtwoord is veranderd';
             } 
         } else{
