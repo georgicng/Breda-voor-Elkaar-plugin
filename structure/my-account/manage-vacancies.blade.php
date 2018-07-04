@@ -27,6 +27,8 @@ if(is_user_logged_in()){
     
     if ($posts){ ?>
         <ul>
+            <li> <? echo count($posts) ?> Vacature(s) geplaatst </li>
+
         <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT)
                 $reactions = get_users(array(
                     'role' => 'volunteer',
