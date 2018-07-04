@@ -247,3 +247,25 @@ function register_custom_fields_users() {
     }
 }
 add_action('acf/init', 'register_custom_fields_users');
+
+function restrict_post_deletion($post_ID){
+    $restricted_pages = array(
+        'Organisaties',
+        'Vrijwilligers',
+        'Vacatures',
+        'Mijn Account',
+        'Nieuwe Vacature',
+        'Bewerk Vacature',
+        'Beheer Vacatures',
+        'Reacties',
+        'Favorieten',
+        'Wijzig Wachtwoord',
+    );
+    if(in_array(get_the_title($post_ID), $restricted_pages)){
+        echo "Can not delete page from WordPress. Disable the Breda Voor Elkaar plugin to delete the page.";
+        exit;
+    }
+}
+add_action('edit_post', 'restrict_post_deletion', 10, 1);
+add_action('wp_trash_post', 'restrict_post_deletion', 10, 1);
+add_action('before_delete_post', 'restrict_post_deletion', 10, 1);
