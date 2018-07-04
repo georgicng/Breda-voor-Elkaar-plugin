@@ -23,6 +23,7 @@ if(is_user_logged_in()){
 	    'post_id' => 'user_'.$user->ID,
         'form' => false, 
         'fields' => array(
+            'field_acf_form_first_name', // Name
             'field_5b06cc6d43567', // Category
             'field_5b06cc8f43568', // Phone number
             'field_5b06ccef43569', // Image

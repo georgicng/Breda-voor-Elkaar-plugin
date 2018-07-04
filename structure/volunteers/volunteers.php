@@ -13,8 +13,7 @@ add_filter('pre_option_default_role', function ($default_role) {
 /**
  * Add Custom Fields on plugin init.
  */
-function register_custom_fields_volunteer()
-{
+function register_custom_fields_volunteer() {
     if (function_exists('acf_add_local_field_group')) {
         acf_add_local_field_group([
             'key' => 'acf_vrijwilliger',

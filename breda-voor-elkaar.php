@@ -204,4 +204,40 @@ function remove_admin_bar() {
     }
 }
 add_action('after_setup_theme', 'remove_admin_bar');
- 
+
+
+function register_custom_fields_users() {
+    if (function_exists('acf_add_local_field_group')) {
+        acf_add_local_field_group([
+            'key' => 'acf_user',
+            'title' => 'User Custom Fields',
+            'fields' => [
+                [
+                    'key' => 'field_acf_form_first_name',
+                    'label' => 'Naam',
+                    'name' => 'first_name',
+                    'type' => 'text',
+                ],
+            ],
+            'location' => [
+                [
+                    [
+                        'param' => 'ef_user',
+                        'operator' => '==',
+                        'value' => 'organisation',
+                        'order_no' => 0,
+                        'group_no' => 0,
+                    ],
+                ],
+            ],
+            'options' => [
+                'position' => 'normal',
+                'layout' => 'no_box',
+                'hide_on_screen' => [
+                ],
+            ],
+            'menu_order' => 0,
+        ]);
+    }
+}
+add_action('acf/init', 'register_custom_fields_users');
