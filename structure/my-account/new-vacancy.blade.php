@@ -19,9 +19,9 @@ if(is_user_logged_in()){
     ?>
     <div id="new-vacancy-form">
     <?php $options = array(
-	    'post_id' => 'new_post',
-		'post_title'	=> true,
-		'post_content'	=> true,
+        'post_id' => 'new_post',
+        'post_title'	=> true,
+        'post_content'	=> true,
         'fields' => array(
             'field_5b06d097c1efe', // Frequency
             'field_5b06d0d3c1eff', // Start date
@@ -30,13 +30,13 @@ if(is_user_logged_in()){
             'field_5b06d9e740f4c', // Experience
             'field_5b06da1440f4e', // Compensation
         ),
-		'new_post'		=> array(
-			'post_type'		=> 'vacancies',
-			'post_status'	=> 'publish' // You could change the status to a custom review status here
-		)
-	);
-	acf_form( $options );
-	?>
+        'new_post'		=> array(
+            'post_type'		=> 'vacancies',
+            'post_status'	=> 'publish' // You could change the status to a custom review status here
+        )
+    );
+    acf_form( $options );
+    ?>
     </div>
     <?php
     } else{

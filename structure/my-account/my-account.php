@@ -16,7 +16,7 @@ function my_account_template( $page_template ) {
     } else if ( is_page( 'Nieuwe Vacature' ) ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/new-vacancy.blade.php';
     } else if ( is_page( 'Bewerk Vacature' ) ) {
-        $page_template = plugin_dir_path( __FILE__ ) . '/edit-vacancy.blade.php';
+        $page_template = plugin_dir_path( __FILE__ ) . '/edit-vacancy.blade.php'; 
     } else if ( is_page( 'Favorieten' ) ) {
         $page_template = plugin_dir_path( __FILE__ ) . '/favorites.blade.php';
     } else if ( is_page( 'Reacties' ) ) {
@@ -67,11 +67,11 @@ function my_account_menu(){
  * Sync usermeta fields in acf_form to usermeta.
  */
 function usermeta_acf_save_post( $post_id ) {
-    // bail early if no ACF data
+    // Bail early if no ACF data
     if( empty($_POST['acf']) ) {
         return;
     }
-    // bail early if editing in admin
+    // Bail early if editing in admin
     if( is_admin() ) {
         return;
     }
