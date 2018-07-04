@@ -218,6 +218,12 @@ function register_custom_fields_users() {
                     'name' => 'first_name',
                     'type' => 'text',
                 ],
+                [
+                    'key' => 'field_acf_form_email',
+                    'label' => 'Email',
+                    'name' => 'email',
+                    'type' => 'text',
+                ],
             ],
             'location' => [
                 [

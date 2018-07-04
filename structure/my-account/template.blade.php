@@ -24,6 +24,7 @@ if(is_user_logged_in()){
         'form' => false, 
         'fields' => array(
             'field_acf_form_first_name', // Name
+            'field_acf_form_email', // Email
             'field_5b06cc6d43567', // Category
             'field_5b06cc8f43568', // Phone number
             'field_5b06ccef43569', // Image
@@ -48,6 +49,8 @@ if(is_user_logged_in()){
 	    'post_id' => 'user_'.$user->ID,
         'form' => false, 
         'fields' => array(
+            'field_acf_form_first_name', // Name
+            'field_acf_form_email', // Email
             'field_5b06xx6d43567', // Category
             'field_5c05966d1f567', // Experience
             'field_5c05963d1f567', // Age
@@ -61,7 +64,7 @@ if(is_user_logged_in()){
 	acf_form( $options );
 	?>
     <div class="acf-form-submit">
-        <input type="submit" class="acf-button button button-primary button-large" value="Update">			<span class="acf-spinner"></span>			
+        <input type="submit" class="acf-button button button-primary button-large" value="Update"><span class="acf-spinner"></span>			
     </div>
     </form>
     </div>
