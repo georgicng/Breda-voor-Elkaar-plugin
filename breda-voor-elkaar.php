@@ -228,9 +228,9 @@ function register_custom_fields_users() {
             'location' => [
                 [
                     [
-                        'param' => 'ef_user',
+                        'param' => 'user_role',
                         'operator' => '==',
-                        'value' => 'organisation',
+                        'value' => 'all',
                         'order_no' => 0,
                         'group_no' => 0,
                     ],

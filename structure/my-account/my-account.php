@@ -62,3 +62,55 @@ function my_account_menu(){
         echo 'Je moet ingelogd zijn om deze pagina te bekijken.';
     }
 }
+
+/**
+ * Sync usermeta fields in acf_form to usermeta.
+ */
+function usermeta_acf_save_post( $post_id ) {
+    // bail early if no ACF data
+    if( empty($_POST['acf']) ) {
+        return;
+    }
+    // bail early if editing in admin
+    if( is_admin() ) {
+        return;
+    }
+    if( $_POST['post_id'] != 'new' ) {
+        $emailField = $_POST['acf']['field_acf_form_email'];
+        $wp_user_id = str_replace("user_", "", $post_id);
+        if (isset($emailField)) {
+            if (email_exists( $emailField )){
+                // Email exists for another account. Output error here
+            } else {
+                $args = array(
+                    'ID'         => $wp_user_id,
+                    'user_email' => esc_attr( $emailField )
+                );            
+                wp_update_user( $args );
+            }  
+        } 	
+    }
+    // return the ID
+    return $post_id;
+}
+add_action('acf/save_post', 'usermeta_acf_save_post', 20);
+
+/**
+ * Sync wordpress email to custom field when user email is updated in back-end.
+ */
+function sync_custom_field_on_change( $user_id, $old_user_data ) {
+    $user = get_userdata( $user_id );
+    if($old_user_data->user_email != $user->user_email) {
+        update_field('field_acf_form_email', $user->user_email, 'user_'.$user_id);
+    }
+}
+add_action( 'profile_update', 'sync_custom_field_on_change', 10, 2 );
+
+/**
+ * Sync WordPress email on creation to custom field.
+ */
+function sync_custom_field_on_registration( $user_id ) {
+    $user = get_userdata( $user_id );
+    update_field('field_acf_form_email', $user->user_email, 'user_'.$user_id);
+}
+add_action( 'user_register', 'sync_custom_field_on_registration', 10, 1 );
