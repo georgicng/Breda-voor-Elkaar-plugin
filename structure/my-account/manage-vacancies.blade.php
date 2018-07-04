@@ -24,11 +24,27 @@ if(is_user_logged_in()){
         'author'    => $user->ID,
     );
     $posts = get_posts( $args );
+    
     if ($posts){ ?>
         <ul>
-        <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT) ?>
+        <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT)
+                $reactions = get_users(array(
+                    'role' => 'volunteer',
+                    'meta_query' => array(
+                        array(
+                            'key' => 'applications', // name of custom field
+                            'value' => '"' . $p->ID . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
+                            'compare' => 'LIKE'
+                        )
+                    )
+                ));
+        ?>
                 <li>
-                    Vacancy: <a href="/bewerk-vacature?id=<?php echo $p->ID ?>"><?php echo get_the_title($p->ID); ?></a>
+                    <ul>
+                        <li> Vacancy: <?php echo get_the_title($p->ID); ?> </li>
+                        <li> <a href="/bewerk-vacature?id=<?php echo $p->ID ?>">Edit</a> </li>
+                        <li> Aantal reacties: <?php echo count($reactions) ?> </li>
+                    </ul>
                 </li>
         <?php } ?>
         </ul>
