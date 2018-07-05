@@ -68,25 +68,26 @@ function my_account_menu(){
  */
 function usermeta_acf_save_post( $post_id ) {
     // Bail early if no ACF data
-    if( empty($_POST['acf']) ) {
+    if(empty($_POST['acf'])) {
         return;
     }
     // Bail early if editing in admin
-    if( is_admin() ) {
+    if(is_admin()) {
         return;
     }
     if( $_POST['post_id'] != 'new' ) {
         $emailField = $_POST['acf']['field_acf_form_email'];
         $wp_user_id = str_replace("user_", "", $post_id);
         if (isset($emailField)) {
-            if (email_exists( $emailField )){
-                // Email exists for another account. Output error here
+            if (email_exists($emailField)){
+                // Email exists for another account. 
+                // TODO: Output error here
             } else {
                 $args = array(
-                    'ID'         => $wp_user_id,
-                    'user_email' => esc_attr( $emailField )
+                    'ID' => $wp_user_id,
+                    'user_email' => esc_attr($emailField)
                 );            
-                wp_update_user( $args );
+                wp_update_user($args);
             }  
         } 	
     }
@@ -98,13 +99,13 @@ add_action('acf/save_post', 'usermeta_acf_save_post', 20);
 /**
  * Sync wordpress email to custom field when user email is updated in back-end.
  */
-function sync_custom_field_on_change( $user_id, $old_user_data ) {
-    $user = get_userdata( $user_id );
+function sync_custom_field_on_change($user_id, $old_user_data) {
+    $user = get_userdata($user_id);
     if($old_user_data->user_email != $user->user_email) {
         update_field('field_acf_form_email', $user->user_email, 'user_'.$user_id);
     }
 }
-add_action( 'profile_update', 'sync_custom_field_on_change', 10, 2 );
+add_action('profile_update', 'sync_custom_field_on_change', 10, 2);
 
 /**
  * Sync WordPress email on creation to custom field.

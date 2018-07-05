@@ -45,8 +45,8 @@ setup_postdata( $post );
 
 <?php
     $args = array(
-      'author'        =>  $ID,
-      'post_type'     =>  'vacancies',
+      'author' => $ID,
+      'post_type' => 'vacancies',
     );
     $posts = get_posts($args);
     if ($posts){ ?>
