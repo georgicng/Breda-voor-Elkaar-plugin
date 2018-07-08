@@ -29,8 +29,8 @@ if(is_user_logged_in()){
                 <div id="edit-vacancy-form">
                 <?php $options = array(
                     'post_id' => $_GET['id'],
-                    'post_title'	=> true,
-                    'post_content'	=> true,
+                    'post_title' => true,
+                    'post_content' => true,
                     'fields' => array(
                         'field_5b06d097c1efe', // Frequency
                         'field_5b06d0d3c1eff', // Start date
