@@ -1,4 +1,7 @@
-<?php //get_header(); ?>
+@extends('layouts.app')
+
+@section('content')
+  @include('partials.page-header')
 
 <?php
 $ID = get_queried_object()->ID;
@@ -6,7 +9,6 @@ $usermeta = get_user_meta($ID);
 $userdata = get_userdata($ID);
 ?>
 
-<!-- Body content -->
     <li>
         ID: <?php echo $ID; ?>
     </li>
@@ -50,23 +52,21 @@ $userdata = get_userdata($ID);
 
 <?php
 $posts = get_field('applied', 'user_' . $ID);
-if ($posts): ?>
+if ($posts){ ?>
     <li>
         <ul>
-        <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
+        <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT) ?>
                 <li>
                     Applied to: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
                 </li>
-            <?php endforeach;?>
+        <?php } ?>
         </ul>
     </li>
-    <?php endif;
+<?php }
 ?>
 
 <?
 wp_reset_postdata();
 ?>
 
-<!-- End body content -->
-
-<?php //get_footer(); ?>
+@endsection

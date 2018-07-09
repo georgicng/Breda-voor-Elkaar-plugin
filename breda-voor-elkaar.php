@@ -99,9 +99,9 @@ function change_template_single_author($template) {
         $author_meta = get_userdata($author_id);
         $author_roles = $author_meta->roles;
         if (in_array('organisation', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/organisations/single.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/organisations/single.blade.php';
         } elseif (in_array('volunteer', $author_roles)) {
-            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/single.php';
+            $template = plugin_dir_path(__FILE__) . 'structure/volunteers/single.blade.php';
         } else {
             echo 'user was not an organisation nor a volunteer';
         }
@@ -194,3 +194,79 @@ function filter_script($page){
 
     <?php
 }
+
+/**
+ * Disable the administrator bar for non-admins.
+ */
+function remove_admin_bar() {
+    if (!current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
+}
+add_action('after_setup_theme', 'remove_admin_bar');
+
+
+function register_custom_fields_users() {
+    if (function_exists('acf_add_local_field_group')) {
+        acf_add_local_field_group([
+            'key' => 'acf_user',
+            'title' => 'User Custom Fields',
+            'fields' => [
+                [
+                    'key' => 'field_acf_form_first_name',
+                    'label' => 'Naam',
+                    'name' => 'first_name',
+                    'type' => 'text',
+                ],
+                [
+                    'key' => 'field_acf_form_email',
+                    'label' => 'Email',
+                    'name' => 'email',
+                    'type' => 'text',
+                ],
+            ],
+            'location' => [
+                [
+                    [
+                        'param' => 'user_role',
+                        'operator' => '==',
+                        'value' => 'all',
+                        'order_no' => 0,
+                        'group_no' => 0,
+                    ],
+                ],
+            ],
+            'options' => [
+                'position' => 'normal',
+                'layout' => 'no_box',
+                'hide_on_screen' => [
+                ],
+            ],
+            'menu_order' => 0,
+        ]);
+    }
+}
+add_action('acf/init', 'register_custom_fields_users');
+
+function restrict_post_deletion($post_ID){
+    $restricted_pages = array(
+        'Organisaties',
+        'Vrijwilligers',
+        'Vacatures',
+        'Mijn Account',
+        'Nieuwe Vacature',
+        'Bewerk Vacature',
+        'Beheer Vacatures',
+        'Reacties',
+        'Favorieten',
+        'Wijzig Wachtwoord',
+    );
+    if(in_array(get_the_title($post_ID), $restricted_pages)){
+        echo "Can not delete page from WordPress. Disable the Breda Voor Elkaar plugin to delete the page.";
+        exit;
+    }
+}
+add_action('before_edit_post', 'restrict_post_deletion', 10, 1);
+add_action('edit_post', 'restrict_post_deletion', 10, 1);
+add_action('wp_trash_post', 'restrict_post_deletion', 10, 1);
+add_action('before_delete_post', 'restrict_post_deletion', 10, 1);

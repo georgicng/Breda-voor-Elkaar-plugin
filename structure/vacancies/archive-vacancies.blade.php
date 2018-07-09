@@ -1,5 +1,3 @@
-<?php /* Template Name: Vacatures */?>
-
 @extends('layouts.app')
 
 @section('content')
@@ -7,6 +5,13 @@
 
 <?php
 global $wpdb;
+// Start session to save posts per page
+if (!session_id()) {
+    session_start();
+}
+if(isset($_GET['nr'])){
+    $_SESSION['nr'] = $_GET['nr'];
+}
 
 // Pagination
 if (get_query_var('paged')) {
@@ -16,7 +21,10 @@ if (get_query_var('paged')) {
 } else {
     $current_page = 1;
 }
-$posts_per_page = 10; // ToDo: make this a _get variable
+$posts_per_page = 10;
+if(isset($_SESSION['nr'])){
+    $posts_per_page = $_SESSION['nr'];
+}
 
 // Filters
 $meta_query = array('relation' => 'OR'); // Array of arrays that individually store key/value pairs.
@@ -37,6 +45,8 @@ foreach($filter_keys as $acf_key => $key){
     if(isset($_GET[$key])){
         $field['value'] = explode(',', $_GET[$key]);
         add_to_meta_query_if_get_exists($key,$_GET[$key],$meta_query);
+    } else{
+        $field['value'] = array();
     }
     ?>
     <div class="filter" data-filter="<?php echo $key; ?>">
@@ -90,7 +100,7 @@ $num_pages = ceil($total_posts / $posts_per_page); // How many pages of posts we
 // Post Loop
 if (!empty($posts)) {
     foreach($posts as $p) {
-        echo '<li> ID: '.$p->ID.'</li>';
+        echo '<a href="'.get_post_permalink($p->ID).'"><li> ID: '.$p->ID.'</li></a>';
     }
     numeric_pagination($current_page, $num_pages);
 } else {

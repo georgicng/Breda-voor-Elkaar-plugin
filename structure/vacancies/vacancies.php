@@ -16,7 +16,6 @@ function create_post_type_vacancy() {
             ],
             'public' => true,
             'has_archive' => true,
-            'taxonomies' => ['category'],
             'rewrite' => array( 'slug' => 'vacatures' ),
         ]
     );
@@ -33,6 +32,47 @@ function register_custom_fields_vacancy() {
             'title' => 'Vacancies',
             'fields' => [
                 [
+                    'key' => 'field_5b06cc6d43567',
+                    'label' => 'Soort Vrijwilligerswerk',
+                    'name' => 'categorie',
+                    'type' => 'checkbox',
+                    'choices' => [
+                        '(huis)dieren' => '(huis)dieren',
+                        'Administratie' => 'Administratie',
+                        'Bar en kantine' => 'Bar en kantine',
+                        'Bestuur en strategie' => 'Bestuur en strategie',
+                        'Boodschappen' => 'Boodschappen',
+                        'Collectie en fondsenwerving' => 'Collectie en fondsenwerving',
+                        'Computer' => 'Computer',
+                        'Coördineren en regelen' => 'Coördineren en regelen',
+                        'Creatief en muziek' => 'Creatief en muziek',
+                        'Digitaal en IT' => 'Digitaal en IT',
+                        'Erop uit' => 'Erop uit',
+                        'Evenementen' => 'Evenementen',
+                        'Financieel en juridisch' => 'Financieel en juridisch',
+                        'Gastvrouw-heer' => 'Gastvrouw-heer',
+                        'Geschikt als team- of vriendenuitje' => 'Geschikt als team- of vriendenuitje',
+                        'Gezelschap' => 'Gezelschap',
+                        'Huishoudelijk' => 'Huishoudelijk',
+                        'Huiswerkbegeleiding' => 'Huiswerkbegeleiding',
+                        'Klussen en techniek' => 'Klussen en techniek',
+                        'Maaltijden en koken' => 'Maaltijden en koken',
+                        'Maatschappelijke stage' => 'Maatschappelijke stage',
+                        'Mantelzorg ondersteuning' => 'Mantelzorg ondersteuning',
+                        'Marketing, communicatie en PR' => 'Marketing, communicatie en PR',
+                        'Oppas' => 'Oppas',
+                        'Sporten' => 'Sporten',
+                        'Taal en lezen' => 'Taal en lezen',
+                        'Toezicht en beheer' => 'Toezicht en beheer',
+                        'Tuin en natuur' => 'Tuin en natuur',
+                        'Vervoer' => 'Vervoer',
+                        'Vluchtelingenondersteuning' => 'Vluchtelingenondersteuning',
+                        'Activiteitenbegeleiding' => 'Activiteitenbegeleiding',
+                    ],
+                    'default_value' => '',
+                    'layout' => 'vertical',
+                ],
+                [
                     'key' => 'field_5b06d097c1efe',
                     'label' => 'Frequentie',
                     'name' => 'frequentie',
@@ -46,11 +86,10 @@ function register_custom_fields_vacancy() {
                         'id' => '',
                     ],
                     'choices' => [
-                        'Dagelijks' => 'Dagelijks',
-                        'Wekelijks' => 'Wekelijks',
-                        'Maandelijks' => 'Maandelijks',
-                        'Jaarlijks' => 'Jaarlijks',
                         'Eenmalig' => 'Eenmalig',
+                        'Soms' => 'Soms',
+                        'Regelmatig' => 'Regelmatig',
+                        'Structureel' => 'Structureel',
                     ],
                     'allow_custom' => 0,
                     'save_custom' => 0,
@@ -108,15 +147,12 @@ function register_custom_fields_vacancy() {
                         'id' => '',
                     ],
                     'choices' => [
-                        'opleiding1' => 'opleiding1',
-                        'opleiding2' => 'opleiding2',
-                        'opleiding3' => 'opleiding3',
-                        'opleiding4' => 'opleiding4',
-                        'opleiding5' => 'opleiding5',
-                        'opleiding6' => 'opleiding6',
-                        'opleiding7' => 'opleiding7',
-                        'opleiding8' => 'opleiding8',
-                        'opleiding9' => 'opleiding9',
+                        'Voortgezet Onderwijs' => 'Voortgezet Onderwijs',
+                        'MBO' => 'MBO',
+                        'HBO' => 'HBO',
+                        'Universitair' => 'Universitair',
+                        'Student' => 'Student',
+                        'Anders' => 'Anders',
                     ],
                     'allow_custom' => 0,
                     'save_custom' => 0,
@@ -130,7 +166,7 @@ function register_custom_fields_vacancy() {
                     'key' => 'field_5b06d9e740f4c',
                     'label' => 'Ervaring',
                     'name' => 'ervaring',
-                    'type' => 'textarea',
+                    'type' => 'checkbox',
                     'instructions' => '',
                     'required' => 0,
                     'conditional_logic' => 0,
@@ -139,11 +175,24 @@ function register_custom_fields_vacancy() {
                         'class' => '',
                         'id' => '',
                     ],
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'maxlength' => '',
-                    'rows' => '',
-                    'new_lines' => '',
+                    'choices' => [
+                        'Geen ervaring' => 'Geen ervaring',
+                        'minder dan 1 jaar' => 'minder dan 1 jaar',
+                        '2 jaar' => '2 jaar',
+                        '3 jaar' => '2 jaar',
+                        '4 jaar' => '2 jaar',
+                        '5 jaar' => '2 jaar',
+                        '6 jaar' => '2 jaar',
+                        '7 jaar' => '2 jaar',
+                        '8 jaar of meer' => '8 jaar of meer',
+                    ],
+                    'allow_custom' => 0,
+                    'save_custom' => 0,
+                    'default_value' => [
+                    ],
+                    'layout' => 'vertical',
+                    'toggle' => 0,
+                    'return_format' => 'value',
                 ],
                 [
                     'key' => 'field_5b06da1440f4e',
@@ -159,15 +208,8 @@ function register_custom_fields_vacancy() {
                         'id' => '',
                     ],
                     'choices' => [
-                        'vergoeding1' => 'vergoeding1',
-                        'vergoeding2' => 'vergoeding2',
-                        'vergoeding3' => 'vergoeding3',
-                        'vergoeding4' => 'vergoeding4',
-                        'vergoeding5' => 'vergoeding5',
-                        'vergoeding6' => 'vergoeding6',
-                        'vergoeding7' => 'vergoeding7',
-                        'vergoeding8' => 'vergoeding8',
-                        'vergoeding9' => 'vergoeding9',
+                        'Met vergoeding' => 'Met vergoeding',
+                        'Geen vergoeding' => 'Geen vergoeding',
                     ],
                     'allow_custom' => 0,
                     'save_custom' => 0,
@@ -204,9 +246,20 @@ add_action('acf/init', 'register_custom_fields_vacancy');
  * Set template for archive page.
  */    
  function archive_vacancy_template( $page_template ) {
-     if ( is_page( 'Vacatures' ) ) {
-         $page_template = plugin_dir_path( __FILE__ ) . '/archive-vacancies.blade.php';
-     }
-     return $page_template;
+    if ( is_post_type_archive( 'vacancies' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/archive-vacancies.blade.php';
+    }
+    return $page_template;
  }
- add_filter( 'page_template', 'archive_vacancy_template' );
+ add_filter( 'archive_template', 'archive_vacancy_template' );
+ 
+/**
+ * Set template for single page.
+ */    
+function single_vacancy_template( $page_template ) {
+    if ( is_singular( 'vacancies' ) ) {
+        $page_template = plugin_dir_path( __FILE__ ) . '/single.blade.php';
+    }
+    return $page_template;
+ }
+ add_filter( 'single_template', 'single_vacancy_template' );

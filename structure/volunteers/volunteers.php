@@ -13,8 +13,7 @@ add_filter('pre_option_default_role', function ($default_role) {
 /**
  * Add Custom Fields on plugin init.
  */
-function register_custom_fields_volunteer()
-{
+function register_custom_fields_volunteer() {
     if (function_exists('acf_add_local_field_group')) {
         acf_add_local_field_group([
             'key' => 'acf_vrijwilliger',
@@ -22,7 +21,7 @@ function register_custom_fields_volunteer()
             'fields' => [
                 [
                     'key' => 'field_5b0596121f564',
-                    'label' => 'adres',
+                    'label' => 'Adres',
                     'name' => 'adres',
                     'type' => 'google_map',
                     'center_lat' => '51.5598461',
@@ -73,7 +72,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5c05966d1f567',
-                    'label' => 'ervaring',
+                    'label' => 'Ervaring',
                     'name' => 'ervaring',
                     'type' => 'checkbox',
                     'choices' => [
@@ -94,7 +93,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5c05963d1f567',
-                    'label' => 'leeftijd',
+                    'label' => 'Leeftijd',
                     'name' => 'leeftijd',
                     'type' => 'checkbox',
                     'choices' => [
@@ -114,7 +113,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5b05966d1f567',
-                    'label' => 'opleiding',
+                    'label' => 'Opleiding',
                     'name' => 'opleiding',
                     'type' => 'checkbox',
                     'choices' => [
@@ -131,7 +130,7 @@ function register_custom_fields_volunteer()
                 ],
                 [
                     'key' => 'field_5b0596ba1f568',
-                    'label' => 'cv',
+                    'label' => 'CV',
                     'name' => 'cv',
                     'type' => 'file',
                     'save_format' => 'url',
@@ -173,8 +172,36 @@ function register_relationships_volunteer()
             'fields' => array(
                 array(
                     'key' => 'field_5b0fe6fd5dfc7',
-                    'label' => 'Applied',
-                    'name' => 'applied',
+                    'label' => 'Reacties',
+                    'name' => 'applications',
+                    'type' => 'relationship',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'post_type' => array(
+                        0 => 'vacancies',
+                    ),
+                    'taxonomy' => array(
+                    ),
+                    'filters' => array(
+                        0 => 'search',
+                        1 => 'post_type',
+                        2 => 'taxonomy',
+                    ),
+                    'elements' => '',
+                    'min' => '',
+                    'max' => '',
+                    'return_format' => 'object',
+                ),
+                array(
+                    'key' => 'field_5b0frsad5dfc7',
+                    'label' => 'Favorieten',
+                    'name' => 'favorites',
                     'type' => 'relationship',
                     'instructions' => '',
                     'required' => 0,

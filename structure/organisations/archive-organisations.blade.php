@@ -7,6 +7,13 @@
 
 <?php
 global $wpdb;
+// Start session to save posts per page
+if (!session_id()) {
+    session_start();
+}
+if(isset($_GET['nr'])){
+    $_SESSION['nr'] = $_GET['nr'];
+}
 
 // Pagination
 if (get_query_var('paged')) {
@@ -16,7 +23,10 @@ if (get_query_var('paged')) {
 } else {
     $current_page = 1;
 }
-$users_per_page = 10; // ToDo: make this a _get variable
+$users_per_page = 10;
+if(isset($_SESSION['nr'])){
+    $users_per_page = $_SESSION['nr'];
+}
 
 // Filters
 $meta_query = array('relation' => 'OR'); // Array of arrays that individually store key/value pairs.
@@ -35,6 +45,8 @@ foreach($filter_keys as $acf_key => $key){
     if(isset($_GET[$key])){
         $field['value'] = explode(',', $_GET[$key]);
         add_to_meta_query_if_get_exists($key,$_GET[$key],$meta_query);
+    } else{
+        $field['value'] = array();
     }
     ?>
     <div class="filter" data-filter="<?php echo $key; ?>">
@@ -93,7 +105,9 @@ if (!empty($user_query->get_results())) {
         ?>
         <ul>
             <li> <?php echo $user->ID ?> </li>
+            <a href="<?php echo get_author_posts_url($user->ID); ?>">
             <li> <?php echo $user->display_name ?> </li>
+            </a>
             <li> <?php the_field('afbeelding', 'user_' . $user->ID)?> </li>
             <li>
             <?php 

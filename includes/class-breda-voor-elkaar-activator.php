@@ -38,7 +38,14 @@ class Breda_Voor_Elkaar_Activator {
         create_page('Organisaties');
         create_page('Vrijwilligers');
         create_page('Vacatures');
+
         create_page('Mijn Account');
+        create_page('Nieuwe Vacature');
+        create_page('Bewerk Vacature');
+        create_page('Beheer Vacatures');
+        create_page('Reacties');
+        create_page('Favorieten');
+        create_page('Wijzig Wachtwoord');
     }
 }
 
