@@ -27,7 +27,8 @@
  * @subpackage Breda_Voor_Elkaar/includes
  * @author     Bytecode Digital Agency B.V. <support@bytecode.nl>
  */
-class Breda_Voor_Elkaar {
+class Breda_Voor_Elkaar
+{
     /**
      * The loader that's responsible for maintaining and registering all hooks that power
      * the plugin.
@@ -65,7 +66,8 @@ class Breda_Voor_Elkaar {
      *
      * @since    1.0.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         if (defined('PLUGIN_NAME_VERSION')) {
             $this->version = PLUGIN_NAME_VERSION;
         } else {
@@ -95,7 +97,8 @@ class Breda_Voor_Elkaar {
      * @since    1.0.0
      * @access   private
      */
-    private function load_dependencies() {
+    private function load_dependencies()
+    {
         /**
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
@@ -140,6 +143,21 @@ class Breda_Voor_Elkaar {
         require_once plugin_dir_path(dirname(__FILE__)) . 'structure/my-account/my-account.php';
 
         /**
+         * The class responsible for the custom courses functionality.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'structure/courses/courses.php';
+
+        /**
+         * The class responsible for the custom links functionality.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'structure/links/links.php';
+
+        /**
+         * The class responsible for the custom content block functionality.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'structure/content/content.php';
+
+        /**
          * The ACF plugin dependency, which is used to add fields to the above post and user types
          */
         if (!class_exists('acf')) {
@@ -158,7 +176,8 @@ class Breda_Voor_Elkaar {
      * @since    1.0.0
      * @access   private
      */
-    private function set_locale() {
+    private function set_locale()
+    {
         $plugin_i18n = new Breda_Voor_Elkaar_i18n();
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
@@ -171,7 +190,8 @@ class Breda_Voor_Elkaar {
      * @since    1.0.0
      * @access   private
      */
-    private function define_admin_hooks() {
+    private function define_admin_hooks()
+    {
         $plugin_admin = new Breda_Voor_Elkaar_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
@@ -185,7 +205,8 @@ class Breda_Voor_Elkaar {
      * @since    1.0.0
      * @access   private
      */
-    private function define_public_hooks() {
+    private function define_public_hooks()
+    {
         $plugin_public = new Breda_Voor_Elkaar_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
@@ -197,7 +218,8 @@ class Breda_Voor_Elkaar {
      *
      * @since    1.0.0
      */
-    public function run() {
+    public function run()
+    {
         $this->loader->run();
     }
 
@@ -208,7 +230,8 @@ class Breda_Voor_Elkaar {
      * @since     1.0.0
      * @return    string    The name of the plugin.
      */
-    public function get_plugin_name() {
+    public function get_plugin_name()
+    {
         return $this->plugin_name;
     }
 
@@ -218,7 +241,8 @@ class Breda_Voor_Elkaar {
      * @since     1.0.0
      * @return    Breda_Voor_Elkaar_Loader    Orchestrates the hooks of the plugin.
      */
-    public function get_loader() {
+    public function get_loader()
+    {
         return $this->loader;
     }
 
@@ -228,7 +252,8 @@ class Breda_Voor_Elkaar {
      * @since     1.0.0
      * @return    string    The version number of the plugin.
      */
-    public function get_version() {
+    public function get_version()
+    {
         return $this->version;
     }
 }
