@@ -6,7 +6,8 @@
 /**
  * Create the 'Vacancies' post type
  */
-function create_post_type_vacancy() {
+function create_post_type_vacancy()
+{
     register_post_type(
         'vacancies',
         [
@@ -16,7 +17,7 @@ function create_post_type_vacancy() {
             ],
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array( 'slug' => 'vacatures' ),
+            'rewrite' => array('slug' => 'vacatures'),
         ]
     );
 }
@@ -25,7 +26,8 @@ add_action('init', 'create_post_type_vacancy');
 /**
  * Add Custom Fields on plugin init.
  */
-function register_custom_fields_vacancy() {
+function register_custom_fields_vacancy()
+{
     if (function_exists('acf_add_local_field_group')) {
         acf_add_local_field_group([
             'key' => 'group_5b06d03b9459b',
@@ -244,22 +246,24 @@ add_action('acf/init', 'register_custom_fields_vacancy');
 
 /**
  * Set template for archive page.
- */    
- function archive_vacancy_template( $page_template ) {
-    if ( is_post_type_archive( 'vacancies' ) ) {
-        $page_template = plugin_dir_path( __FILE__ ) . '/archive-vacancies.blade.php';
+ */
+function archive_vacancy_template($page_template)
+{
+    if (is_post_type_archive('vacancies')) {
+        $page_template = plugin_dir_path(__FILE__) . '/archive-vacancies.blade.php';
     }
     return $page_template;
- }
- add_filter( 'archive_template', 'archive_vacancy_template' );
- 
+}
+//add_filter( 'archive_template', 'archive_vacancy_template' );
+
 /**
  * Set template for single page.
- */    
-function single_vacancy_template( $page_template ) {
-    if ( is_singular( 'vacancies' ) ) {
-        $page_template = plugin_dir_path( __FILE__ ) . '/single.blade.php';
+ */
+function single_vacancy_template($page_template)
+{
+    if (is_singular('vacancies')) {
+        $page_template = plugin_dir_path(__FILE__) . '/single.blade.php';
     }
     return $page_template;
- }
- add_filter( 'single_template', 'single_vacancy_template' );
+}
+//add_filter( 'single_template', 'single_vacancy_template' );
