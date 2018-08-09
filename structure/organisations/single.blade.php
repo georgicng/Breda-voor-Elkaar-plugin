@@ -23,7 +23,7 @@
                         <div class="company__contact">
                             <div class="d-flex flex-column company__contact-group">
                                 <small class="company__address">{{ get_field('adres', 'user_' . $ID)['address'] }}</small>
-                                <small class="company__phone">4811 XT Breda</small>
+                                <small class="company__phone">{{ get_field('telefoonnummer', 'user_' . $ID) }}</small>
                                 <small class="company__website">{{$userdata->user_url}}</small>
                                 <small class="company__email">{{$userdata->user_email}}</small>
                             </div>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="row company__bio">
-                        {{ $usermeta->description }}
+                        {{ $userdata->description }}
                     </div>
                     @if($categories = get_field('categorie', 'user_' . $ID))
                         <div class="d-flex flex-wrap text-dark company__categories">
@@ -55,20 +55,21 @@
                         );
                         $posts = get_posts($args);
                     @endphp
-                    @if ($posts)    
-                        @foreach ($posts as $post)
+                    @if ($posts)
+                    <h1>Vacancies</h1>    
+                        @foreach ($posts as $p)
                             @php
-                                $more = '.<a href="' . get_permalink($post->ID) . '" class="card-link vacancy-card__link">lees meer ›</a>';
+                                $more = '.<a href="' . get_permalink($p->ID) . '" class="card-link vacancy-card__link">lees meer ›</a>';
                                 $vacancy = [
-                                    'title' => $post->post_title,
-                                    'link' => get_permalink($post->ID),
-                                    'image_link' => get_the_post_thumbnail_url($post->ID, [200, 200]),
-                                    'excerpt' => wp_kses_post(wp_trim_words($post->post_content, 25, $more)),
-                                    'subtitle' => $post->post_title,
-                                    'footer' => get_field("image_link", $post->ID),
+                                    'title' => $p->post_title,
+                                    'link' => get_permalink($p->ID),
+                                    'image_link' => get_the_post_thumbnail_url($p->ID, [200, 200]),
+                                    'excerpt' => wp_kses_post(wp_trim_words($p->post_content, 25, $more)),
+                                    'subtitle' => $p->post_title,
+                                    'footer' => get_field("image_link", $p->ID),
                                 ];
                             @endphp
-                            @include('partials.content-organisation-vacancies')
+                            @include('partials.content-vacancy')
                         @endforeach
                     @endif
                     @php

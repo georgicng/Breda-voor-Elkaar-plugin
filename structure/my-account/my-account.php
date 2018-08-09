@@ -39,35 +39,45 @@ function my_account_menu()
         $role = ( array ) $user->roles;
         if ($role[0] == 'organisation') {
             ?>
-        <nav aria-label="breadcrumb">        
-            <ul id="account-menu" class="breadcrumb">
-                <!--button href="#" class="btn btn-primary"><i class="fa fa-user"></i>User Menu</button-->
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/mijn-account') ?>">Profiel</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/beheer-vacatures') ?>">Beheer vacatures</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/nieuwe-vacature') ?>">Nieuwe vacature plaatsen</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/wijzig-wachtwoord') ?>">Wijzig wachtwoord</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">User Menu</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#account-menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="account-menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="<?php echo home_url('/mijn-account') ?>" class="nav-link">Profiel</a></li>
+                    <li class="nav-item"><a href="<?php echo home_url('/beheer-vacatures') ?>" class="nav-link">Beheer vacatures</a></li>
+                    <li class="nav-item"><a href="<?php echo home_url('/nieuwe-vacature') ?>" class="nav-link">Nieuwe vacature plaatsen</a></li>
+                    <li class="nav-item"><a href="<?php echo home_url('/wijzig-wachtwoord') ?>" class="nav-link">Wijzig wachtwoord</a></li>
+                    <li class="nav-item"><a href="<?php echo wp_logout_url(home_url()); ?>" class="nav-link">Logout</a></li>
+                </ul>
+            </div>
         </nav>
         <?php
         } elseif ($role[0] == 'volunteer') {
             ?>
-        <nav aria-label="breadcrumb">
-            <ul id="account-menu" class="breadcrumb">
-                <!--button href="#" class="btn btn-primary"><i class="fa fa-user"></i>User Menu</button-->
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/mijn-account') ?>">Profiel</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/reacties') ?>">Reacties</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/favorieten') ?>">Favorieten</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo home_url('/wijzig-wachtwoord') ?>">Wijzig wachtwoord</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">User Menu</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#account-menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="account-menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="<?php echo home_url('/mijn-account') ?>" class="nav-link">Profiel</a></li>
+                    <li class="nav-item"><a href="<?php echo home_url('/reacties') ?>" class="nav-link">Reacties</a></li>
+                    <li class="nav-item"><a href="<?php echo home_url('/favorieten') ?>" class="nav-link">Favorieten</a></li>
+                    <li class="nav-item"><a href="<?php echo home_url('/wijzig-wachtwoord') ?>" class="nav-link">Wijzig wachtwoord</a></li>
+                    <li class="nav-item"><a href="<?php echo wp_logout_url(home_url()); ?>" class="nav-link">Logout</a></li>
+                </ul>
+            </div>
         </nav>
         <?php
         } else {
-            echo '<div class="alert">Uw account is geen vrijwilliger of organisatie.</div>';
+            echo '<div class="alert alert-warning">Uw account is geen vrijwilliger of organisatie.</div>';
         }
     } else {
-        echo '<div class="alert">Je moet ingelogd zijn om deze pagina te bekijken.</div>';
+        echo '<div class="alert alert-warning">Je moet ingelogd zijn om deze pagina te bekijken.</div>';
     }
 }
 

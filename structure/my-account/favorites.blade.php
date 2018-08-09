@@ -20,13 +20,23 @@
                             $posts = get_field('favorites', 'user_' . $user->ID);
                         @endphp
                         @if ($posts)
-                            <ul>
+                        <h1>Your Favorites</h1>
                             @foreach ($posts as $p){{-- // variable must NOT be called $post (IMPORTANT) --}}
-                                    <li>
-                                        Favorited: <a href="{{get_permalink($p->ID)}}">{{get_the_title($p->ID)}}</a>
-                                    </li>
+                                @php
+                                    $more = '.<a href="' . get_permalink($p->ID) . '" class="card-link vacancy-card__link">lees meer ›</a>';
+                                    $vacancy = [
+                                        'title' => $p->post_title,
+                                        'link' => get_permalink($p->ID),
+                                        'image_link' => get_the_post_thumbnail_url($p->ID, [200, 200]),
+                                        'excerpt' => wp_kses_post(wp_trim_words($p->post_content, 25, $more)),
+                                        'subtitle' => $p->p_title,
+                                        'footer' => get_field("image_link", $p->ID),
+                                    ];
+                                @endphp
+                                @include('partials.content-vacancy')
                             @endforeach
-                            </ul>
+                        @else
+                            <div class="member-page__message alert alert-dark" role="alert">No Favorites.</div>
                         @endif
                     </div>
                 @else

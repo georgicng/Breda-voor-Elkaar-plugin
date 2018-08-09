@@ -25,9 +25,7 @@
                 @endphp
             
                 @if ($posts)
-                    <ul>
-                        <li> {{count($posts)}} Vacature(s) geplaatst </li>
-
+                    <h1> {{count($posts)}} Vacature(s) geplaatst </h1>
                     @foreach ($posts as $p) {{-- // variable must NOT be called $post (IMPORTANT) --}}
                         @php        
                             $reactions = get_users(array(
@@ -41,22 +39,22 @@
                                 )
                             ));
                         @endphp
-                        <li>
-                            <ul>
-                                <li> Vacancy: {{get_the_title($p->ID)}} </li>
-                                <li> Aantal reacties: {{count($reactions)}} </li>
-                                <li> <a href="/bewerk-vacature?id={{$p->ID}}">Edit</a> </li>
-                                <li> <a href="/bewerk-vacature?id={{$p->ID}}&trash=true">Delete</a> </li>
-                            </ul>
-                        </li>
+                        <div class="card">
+                            <h5 class="card-header">{{get_the_title($p->ID)}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Aantal reacties: {{count($reactions)}}</h5>
+                                <a href="/bewerk-vacature?id={{$p->ID}}" class="btn btn-primary">Edit</a>
+                                <a href="/bewerk-vacature?id={{$p->ID}}&trash=true" class="btn btn-primary">Delete</a>
+                            </div>
+                        </div>
                     @endforeach
-                    </ul>
                 </div>
+                @else
+                    <div class="member-page__message alert alert-dark" role="alert">No vacancies yet. <a href="{{home_url('/nieuwe-vacature')}}" class="btn btn-primary">Create One Now</a></div>
                 @endif
             @else
                 <div class="member-page__message alert alert-dark" role="alert">Uw account is geen vrijwilliger.</div>
-            @endif
-        
+            @endif        
         @else
             <div class="member-page__message alert alert-dark" role="alert">Je moet ingelogd zijn om deze pagina te bekijken.</div>
         @endif

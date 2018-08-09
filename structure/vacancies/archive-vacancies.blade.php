@@ -36,10 +36,9 @@
                     'field_5b06da1440f4e' => 'vergoeding',
                 );
             @endphp
-                <aside class="col-lg-4 vacancy-list__layered layered">
-                    <a href="#archive-filters" class="list-group-item d-lg-none layered__bar" data-toggle="collapse" aria-expanded="false">Filter</a>
-                    <div id="archive-filters layered__form collapse dont-collapse-lg">
-                        <section class="layered__group">
+                <aside id="archive-filters" class="col-lg-4 vacancy-list__layered layered">
+                    <a href="#filters" class="list-group-item d-lg-none layered__bar" data-toggle="collapse" aria-expanded="false">Filter</a>
+                    <div id="filters layered__form collapse dont-collapse-lg">
                         {{--// Loop over all filter keys and check if they are set in the _Get variable. --}}
 
                         @foreach($filter_keys as $acf_key => $key)
@@ -54,14 +53,13 @@
                                 $field['value'] = array();
                             }
                             @endphp
-                            <section class="mb-4 layered__group filter" data-filter="{{$field['name']}}">
-                                <h2 class="layered__group-header">{{$field['label']}}</h2>
-                                <div class="filter" data-filter="{{ $key }}">
-                                    {!! render_field($field) !!}
-                                </div>
-                            </section>
-                        @endforeach
+                            <section class="mb-4 layered__group">
+                            <h2 class="layered__group-header">{{$field['label']}}</h2>
+                            <div class="b-4 layered__field filter" data-filter="{{  $key }}">
+                                {!! render_field($field); !!}
+                            </div>
                         </section>
+                        @endforeach
                     </div>
                 </aside>
                 <main class="col-lg-8 vacancy-list__items">
