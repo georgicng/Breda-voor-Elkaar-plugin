@@ -1,43 +1,40 @@
-<?php /* Template Name: Mijn Account */?>
+{{--
+  Template Name: Reacties
+--}}
 
-<?php acf_form_head() ?>
-
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('content')
-  @include('partials.page-header')
-
-<?php
-    my_account_menu();
-?>
-
-<?php
-if(is_user_logged_in()){
-    $user = wp_get_current_user();
-    $role = ( array ) $user->roles;
-    if($role[0] == 'volunteer'){
-    ?>
-    <div id="applications">
-    <?php
-    $posts = get_field('applications', 'user_' . $user->ID);
-    if ($posts){ ?>
-        <ul>
-        <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT) ?>
-                <li>
-                    Applied to: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
-                </li>
-        <?php } ?>
-        </ul>
-    <?php }
-    ?>
-    </div>
-    <?php
-    } else{
-        echo 'Uw account is geen vrijwilliger.';
-    }
-} else{
-    echo 'Je moet ingelogd zijn om deze pagina te bekijken.';
-}
-?>
-
+    @include('partials.page-header')
+    <section @php post_class('member-page') @endphp>
+        <div class="member-page__body  container">
+            <div class="member-page__menu row">{!! my_account_menu() !!}</div>
+            @if(is_user_logged_in())
+                @php 
+                    $user = wp_get_current_user();
+                    $role = ( array ) $user->roles;
+                @endphp
+                @if($role[0] == 'volunteer')  
+                    <div id="applications">
+                        @php
+                            $posts = get_field('applications', 'user_' . $user->ID);
+                        @endphp
+                        @if ($posts){
+                            <ul>
+                                @foreach ($posts as $p) {{-- variable must NOT be called $post (IMPORTANT) --}}
+                                    <li>
+                                        Applied to: <a href="{{get_permalink($p->ID)}}">{{get_the_title($p->ID)}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif    
+                    </div>
+                @else
+                    <div class="member-page__message alert alert-dark" role="alert">Uw account is geen vrijwilliger.</div>
+                @endif
+            @else
+                <div class="member-page__message alert alert-dark" role="alert">Je moet ingelogd zijn om deze pagina te bekijken.</div>
+            @endif
+        </div>
+    </section>
 @endsection

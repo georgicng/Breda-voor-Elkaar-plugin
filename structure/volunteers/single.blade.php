@@ -2,71 +2,73 @@
 
 @section('content')
   @include('partials.page-header')
+    <section @php post_class('volunteer-page') @endphp>
+        <div class="volunteer-page__body">
+            @php
+                $ID = get_queried_object()->ID;
+                $usermeta = get_user_meta($ID);
+                $userdata = get_userdata($ID);
+            @endphp
 
-<?php
-$ID = get_queried_object()->ID;
-$usermeta = get_user_meta($ID);
-$userdata = get_userdata($ID);
-?>
-
-    <li>
-        ID: <?php echo $ID; ?>
-    </li>
-    <li>
-        posted on: <?php echo date("d M Y", strtotime($userdata->user_registered)); ?>
-    </li>
-    <li>
-        login name: <?php echo $usermeta['nickname'][0]; ?>
-    </li>
-    <li>
-        first name: <?php echo $usermeta['first_name'][0]; ?>
-    </li>
-    <li>
-        last name: <?php echo $usermeta['last_name'][0]; ?>
-    </li>
-    <?php if (get_field('leeftijd', 'user_' . $ID)) { ?>
-    <li>
-        leeftijd: <?php the_field('leeftijd', 'user_' . $ID); ?>
-    </li>
-    <?php }?>
-    <?php if (get_field('adres', 'user_' . $ID)) { ?>
-    <li>
-        adres: <?php echo get_field('adres', 'user_' . $ID)['address']; ?>
-    </li>
-    <?php }?>
-    <?php if (get_field('opleiding', 'user_' . $ID)) { ?>
-    <li>
-        opleiding: <?php the_field('opleiding', 'user_' . $ID); ?>
-    </li>
-    <?php }?>
-    <?php if (get_field('ervaring', 'user_' . $ID)) { ?>
-    <li>
-        ervaring: <?php the_field('ervaring', 'user_' . $ID); ?>
-    </li>
-    <?php }?>
-    <?php if (get_field('cv', 'user_' . $ID)) { ?>
-    <li>
-        cv downloadlink: <?php the_field('cv', 'user_' . $ID); ?>
-    </li>
-    <?php }?>
-
-<?php
-$posts = get_field('applied', 'user_' . $ID);
-if ($posts){ ?>
-    <li>
-        <ul>
-        <?php foreach ($posts as $p){ // variable must NOT be called $post (IMPORTANT) ?>
+            <li>
+                ID: {{$ID}}
+            </li>
+            <li>
+                posted on: {{date("d M Y", strtotime($userdata->user_registered))}}
+            </li>
+            <li>
+                login name: {{$usermeta['nickname'][0]}}
+            </li>
+            <li>
+                first name: {{$usermeta['first_name'][0]}}
+            </li>
+            <li>
+                last name: {{$usermeta['last_name'][0]}}
+            </li>
+            @if (get_field('leeftijd', 'user_' . $ID))
                 <li>
-                    Applied to: <a href="<?php echo get_permalink($p->ID); ?>"><?php echo get_the_title($p->ID); ?></a>
+                    leeftijd: {{get_field('leeftijd', 'user_' . $ID)}}
                 </li>
-        <?php } ?>
-        </ul>
-    </li>
-<?php }
-?>
+            @endif
+            @if(get_field('adres', 'user_' . $ID))
+                <li>
+                    adres: {{get_field('adres', 'user_' . $ID)['address']}}
+                </li>
+            @endif
+            @if(get_field('opleiding', 'user_' . $ID))
+                <li>
+                    opleiding: {{get_field('opleiding', 'user_' . $ID)}}
+                </li>
+            @endif
+            @if(get_field('ervaring', 'user_' . $ID))
+                <li>
+                    ervaring: {{get_field('ervaring', 'user_' . $ID)}}
+                </li>
+            @endif
+            @if(get_field('cv', 'user_' . $ID))
+                <li>
+                    cv downloadlink: {{get_field('cv', 'user_' . $ID)}}
+                </li>
+            @endif
 
-<?
-wp_reset_postdata();
-?>
+            @php
+                $posts = get_field('applied', 'user_' . $ID);
+            @endphp
+            @if($posts)
+                <li>
+                    <ul>
+                    @foreach ($posts as $p){{-- // variable must NOT be called $post (IMPORTANT) --}}
+                            <li>
+                                Applied to: <a href="{{get_permalink($p->ID)}}">{{get_the_title($p->ID)}}</a>
+                            </li>
+                    @endforeach
+                    </ul>
+                </li>
+            @endif
 
+            @php
+                wp_reset_postdata();
+            @endphp
+        </div>
+    </section>
 @endsection

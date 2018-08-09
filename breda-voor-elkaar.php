@@ -114,7 +114,8 @@ add_filter('template_include', 'change_template_single_author');
  * Output pagination for posts and users.
  */
 function numeric_pagination($current_page, $num_pages) {
-    echo '<div class="pagination">';
+    echo '<nav class="d-flex justify-content-center vacancy-list__pagination custom-pagination">'.
+    '<ul class="pagination pagination-sm custom-pagination__list">';
     $start_number = $current_page - 2;
     $end_number = $current_page + 2;
 
@@ -129,25 +130,25 @@ function numeric_pagination($current_page, $num_pages) {
     }
 
     if ($start_number > 1) {
-        echo " 1 ... ";
+        echo '<li class="page-item active custom-pagination__item"> 1 ... </li>';
     }
 
     for ($i = $start_number; $i <= $end_number; $i++) {
         if ($i === $current_page) {
-            echo '<a href="?page='.$i.'">';
+            echo '<li class="page-item active custom-pagination__item"><a href="?page='.$i.'" class="page-link custom-pagination__link">';
             echo " [{$i}] ";
-            echo '</a>';
+            echo '</a></li>';
         } else {
-            echo '<a href="?page='.$i.'">';
+            echo '<li class="page-item active custom-pagination__item"><a href="?page='.$i.'" class="page-link custom-pagination__link">';
             echo " {$i} ";
-            echo '</a>';
+            echo '</a></li>';
         }
     }
 
     if ($end_number < $num_pages) {
-        echo " ... {$num_pages} ";
+        echo '<li class="page-item active custom-pagination__item">... {$num_pages}</li>';
     }
-    echo '</div>';
+    echo '</ul></nav>';
 }
 
 /**
