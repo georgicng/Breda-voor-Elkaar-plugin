@@ -38,7 +38,7 @@
             @endphp
                 <aside id="archive-filters" class="col-lg-4 vacancy-list__layered layered">
                     <a href="#filters" class="list-group-item d-lg-none layered__bar" data-toggle="collapse" aria-expanded="false">Filter</a>
-                    <div id="filters layered__form collapse dont-collapse-lg">
+                    <div id="filters" class="layered__form collapse dont-collapse-lg">
                         {{--// Loop over all filter keys and check if they are set in the _Get variable. --}}
 
                         @foreach($filter_keys as $acf_key => $key)
@@ -113,17 +113,31 @@
                             $vacancy = [
                                 'title' => $post->post_title,
                                 'link' => get_permalink($post->ID),
-                                'image_link' => get_the_post_thumbnail_url($post->ID, [200, 200]),
-                                'excerpt' => wp_kses_post(wp_trim_words($post->post_content, 25, $more)),
-                                'subtitle' => $post->post_title,
+                                'image_link' => get_field('afbeelding', 'user_'.$post->post_author),
+                                'excerpt' => wp_kses_post(wp_trim_words($post->post_content, 25, '...')),
+                                'subtitle' => implode(", ",get_field('categorie', $post->ID)),
                                 'footer' => $time . ' - Breda, Nederland',
                             ];
                         @endphp
-                        @include('partials.content-vacancy')
+                        <div class="card shadow border-light vacancy-list__item  vacancy-card">
+                            <div class="row vacancy-card__header-wrapper">
+                                <div class="col-xxl-2 col-md-3 col-xs-12 vacancy-card__figure d-flex align-items-center">
+                                <img src="{{ $vacancy['image_link']? $vacancy['image_link'] : '//placehold.it/114x76' }}" class="vacancy-card__image">
+                                </div>
+                                <div class="col-xxl-10 col-md-9 col-xs-12 vacancy-card__header-group">
+                                    <h2 class="card-title vacancy-card__header">{{ $vacancy['title'] }}</h2>
+                                    <h3 class="card-subtitle vacancy-card__subheader">{{ $vacancy['subtitle'] }}</h3>
+                                </div>
+                            </div>
+                            <div class="card-body vacancy-card__body">
+                                <div class="vacancy-card__text">{!! $vacancy['excerpt'] !!}<a href="{{ $vacancy['link'] }}" class="card-link vacancy-card__link">lees meer ›</a></div>       
+                            </div>
+                            <div class="card-footer vacancy-card__footer">{{ $vacancy['footer'] }}</div>
+                        </div>
                     @endforeach
                     {!! numeric_pagination($current_page, $num_pages) !!}
                 @else 
-                    <div class="alert">Geen vacature gevonden die aan uw zoekopdracht voldeed.</div>
+                    <div class="alert alert-dark">Geen vacature gevonden die aan uw zoekopdracht voldeed.</div>
                 @endif                
                 </main>
             </div>

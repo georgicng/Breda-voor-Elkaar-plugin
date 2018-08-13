@@ -109,36 +109,35 @@
                         @foreach ($user_query->get_results() as $user) 
                             <div class="card shadow border-light vacancy-list__item  vacancy-card">
                                 <div class="row vacancy-card__header-wrapper">
-                                    <div class="col-md-4 col-xs-12 vacancy-card__figure">
-                                        <img src="{{get_field('afbeelding', 'user_' . $user->ID) }}" class="vacancy-card__image">
+                                    <div class="col-xxl-2 col-md-3 col-xs-12 vacancy-card__figure d-flex align-items-center">
+                                        @php
+                                            $image = get_field('afbeelding', 'user_' . $user->ID);
+                                            $image = $image ? $image : '//placehold.it/114x76';
+                                        @endphp
+                                        <img src="{{$image}}" class="vacancy-card__image">
                                     </div>
-                                    <div class="col-md-8 col-xs-12 vacancy-card__header-group">
+                                    <div class="col-xxl-10 col-md-9 col-xs-12 vacancy-card__header-group">
                                         <h2 class="card-title vacancy-card__header">{{  $user->display_name  }}</h2>
-                                            @php
-                                                if(get_field('vacancies', 'user_' . $user->ID) !== null)
-                                                    $count = count(get_field('vacancies', 'user_' . $user->ID));
-                                                else
-                                                    $count = 0;
-                                            @endphp
-                                        <h3 class="card-subtitle vacancy-card__subheader">No of Vacancies: {{$count}}</h3>
+                                        @if(get_field('categorie', 'user_' . $user->ID))                                            
+                                        <h3 class="card-subtitle vacancy-card__subheader">{{implode(', ',get_field('categorie', 'user_' . $user->ID))}}</h3>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="card-body vacancy-card__body">
                                     <div class="vacancy-card__text">{!! $user->description !!}</div>
-                                    <a href="{{ get_author_posts_url($user->ID) }}" class="card-link vacancy-card__link">lees meer ›</a>
+                                    <a href="{{ get_author_posts_url($user->ID) }}" class="card-link">lees meer ›</a>
                                 </div>
                                 @php
-                                    $categories = get_field('categorie', 'user_' . $user->ID);                                
+                                    if(get_field('vacancies', 'user_' . $user->ID) !== null)
+                                        $count = count(get_field('vacancies', 'user_' . $user->ID));
+                                    else
+                                        $count = 0;
                                 @endphp
-                                <div class="card-footer vacancy-card__footer">
-                                    <div class="d-flex flex-wrap text-dark company__categories">
-                                        @include('partials.content-organisation-categories')
-                                    </div>
-                                </div>
+                                <div class="card-footer vacancy-card__footer">No of Vacancies: {{$count}}</div>                                
                             </div>
                         @endforeach                
                     @else 
-                        <div class="alert">Geen organisatie gevonden die aan uw zoekopdracht voldeed.</div>
+                        <div class="alert alert-dark">Geen organisatie gevonden die aan uw zoekopdracht voldeed.</div>
                     @endif
                     {!! numeric_pagination($current_page, $num_pages) !!}
                 </main>

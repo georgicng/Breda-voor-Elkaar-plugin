@@ -2,7 +2,6 @@
 
 @section('content')
   @include('partials.page-header')
-    <section class="vacancy-list">
         <section class="vacancy-list">
             <div class="container">
                 <div class="row">
@@ -112,19 +111,25 @@
                     {{--// User Loop--}}
                     @if(!empty($user_query->get_results()))
                         @foreach ($user_query->get_results() as $user)
-                            <a href="{{get_author_posts_url($user->ID)}}">
-                                <div class="media">
-                                    <img class="mr-3" src="//placehold.it/50x50" alt="User icon">
-                                    <div class="media-body">
-                                        <h5 class="mt-0">{{$user->display_name}}</h5>
-                                        {{$user->ID}} {{-- put bio here --}}
+                            <div class="card user-profile mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <img src="@asset('images/user.png')" class="img img-rounded img-fluid user-profile__avatar" alt="User Avatar"/>                                            
+                                        </div>
+                                        <div class="col-lg-10"> 
+                                            <a href="{{get_author_posts_url($user->ID)}}">
+                                                <h5 class="user-profile__name">{{$user->display_name}}</h5>
+                                            </a>                                           
+                                            <div class="user-profile__bio">{{$user->description}}</div>
+                                        </div>
                                     </div>
-                                </div>  
-                            </a> 
+                                </div>
+                            </div>                             
                         @endforeach
                         {!! numeric_pagination($current_page, $num_pages) !!}
                     @else 
-                        <div class="alert">Geen vrijwilliger gevonden die aan uw zoekopdracht voldeed.</div>
+                        <div class="alert alert-dark">Geen vrijwilliger gevonden die aan uw zoekopdracht voldeed.</div>
                     @endif
                 </main>
             </div>
