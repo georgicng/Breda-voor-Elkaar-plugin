@@ -51,9 +51,14 @@
                                             'link' => get_permalink($p->ID),
                                             'image_link' => get_field('afbeelding', 'user_'.$p->post_author),
                                             'excerpt' => wp_kses_post(wp_trim_words($p->post_content, 25, '...')),
-                                            'subtitle' => implode(", ",get_field('categorie', $p->ID)),
                                             'footer' => $time . ' - Breda, Nederland',
                                         ];
+                                        $categories = get_field('categorie', $p->ID);
+                                        if (is_array($categories)){
+                                            $vacancy['subtitle'] = implode(", ", $categories);
+                                        } else {
+                                            $vacancy['subtitle'] = $categories;
+                                        }
                                     @endphp
                                     <div class="card shadow border-light vacancy-list__item  vacancy-card">
                                         <div class="row vacancy-card__header-wrapper">
@@ -67,8 +72,10 @@
                                         </div>
                                         <div class="card-body vacancy-card__body">
                                             <div class="vacancy-card__text">{!! $vacancy['excerpt'] !!}</div>
-                                            <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}" class="btn btn-primary">Edit</a>
-                                            <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}&trash=true" class="btn btn-primary">Delete</a>       
+                                            <div class="vacancy-card__actions">
+                                                <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}" class="btn btn-primary vacancy-card__action">Edit</a>
+                                                <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}&trash=true" class="btn btn-primary vacancy-card__action">Delete</a>
+                                            </div>       
                                         </div>
                                         <div class="card-footer vacancy-card__footer">Aantal reacties: {{count($reactions)}}</div>
                                     </div>
@@ -77,7 +84,7 @@
                             @else
                                 <div class="jumbotron mt-3">
                                     <h1>No vacancy found</h1>
-                                    <p class="lead">You need to create a vacancy.</p>
+                                    <p class="lead">You need to create a vacancy to get started.</p>
                                     <a class="btn btn-lg btn-primary" href="{{home_url('/nieuwe-vacature')}}" role="button">Create One Now »</a>
                                 </div>
                             @endif

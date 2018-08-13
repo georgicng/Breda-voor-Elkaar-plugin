@@ -84,15 +84,20 @@
                             <h2>Applied to<h2>
                             @foreach ($posts as $p){{-- // variable must NOT be called $post (IMPORTANT) --}}                            
                                 @php
-                                    $more = '.<a href="' . get_permalink($p->ID) . '" class="card-link vacancy-card__link">lees meer ›</a>';
+                                    $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' ago';
                                     $vacancy = [
                                         'title' => $p->post_title,
                                         'link' => get_permalink($p->ID),
-                                        'image_link' => get_the_post_thumbnail_url($p->ID, [200, 200]),
-                                        'excerpt' => wp_kses_post(wp_trim_words($p->post_content, 25, $more)),
-                                        'subtitle' => $p->p_title,
-                                        'footer' => get_field("image_link", $p->ID),
+                                        'image_link' => get_field('afbeelding', 'user_'.$p->post_author),
+                                        'excerpt' => wp_kses_post(wp_trim_words($p->post_content, 25, '...')),
+                                        'footer' => $time . ' - Breda, Nederland',
                                     ];
+                                    $categories = get_field('categorie', $p->ID);
+                                    if (is_array($categories)){
+                                        $vacancy['subtitle'] = implode(", ", $categories);
+                                    } else {
+                                        $vacancy['subtitle'] = $categories;
+                                    }
                                 @endphp
                                 <div class="card shadow border-light vacancy-list__item  vacancy-card">
                                     <div class="row vacancy-card__header-wrapper">
