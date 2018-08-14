@@ -108,7 +108,7 @@
                 @if (!empty($posts))
                     @foreach($posts as $p)
                         @php
-                        $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' ago';
+                        $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' geleden';
                         $vacancy = [
                             'title' => $p->post_title,
                             'link' => get_permalink($p->ID),

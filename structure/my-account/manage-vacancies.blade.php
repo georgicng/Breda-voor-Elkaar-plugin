@@ -45,7 +45,7 @@
                                                 )
                                             )
                                         ));
-                                        $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' ago';
+                                        $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' geleden';
                                         $vacancy = [
                                             'title' => $p->post_title,
                                             'link' => get_permalink($p->ID),
@@ -72,9 +72,9 @@
                                         </div>
                                         <div class="card-body vacancy-card__body">
                                             <div class="vacancy-card__text">{!! $vacancy['excerpt'] !!}</div>
-                                            <div class="vacancy-card__actions">
-                                                <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}" class="btn btn-primary vacancy-card__action">Edit</a>
-                                                <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}&trash=true" class="btn btn-primary vacancy-card__action">Delete</a>
+                                            <div class="vacancy-card__actions my-3">
+                                                <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}" class="btn btn-primary vacancy-card__action mr-2">Bewerk</a>
+                                                <a href="{{home_url('/bewerk-vacature')}}?id={{$p->ID}}&trash=true" class="btn btn-primary vacancy-card__action">Verwijder</a>
                                             </div>       
                                         </div>
                                         <div class="card-footer vacancy-card__footer">Aantal reacties: {{count($reactions)}}</div>
@@ -83,9 +83,9 @@
                             </div>
                             @else
                                 <div class="jumbotron mt-3">
-                                    <h1>No vacancy found</h1>
-                                    <p class="lead">You need to create a vacancy to get started.</p>
-                                    <a class="btn btn-lg btn-primary" href="{{home_url('/nieuwe-vacature')}}" role="button">Create One Now »</a>
+                                    <h1>Geen vacature gevonden</h1>
+                                    <p class="lead">U moet een vacature aanmaken om te beginnen.</p>
+                                    <a class="btn btn-lg btn-primary" href="{{home_url('/nieuwe-vacature')}}" role="button">Maak er nu een »</a>
                                 </div>
                             @endif
                         @else

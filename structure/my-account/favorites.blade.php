@@ -30,7 +30,7 @@
                                 <h1>Your Favorites</h1>
                                     @foreach ($posts as $p){{-- // variable must NOT be called $post (IMPORTANT) --}}
                                         @php
-                                        $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' ago';
+                                        $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' geleden';
                                         $vacancy = [
                                             'title' => $p->post_title,
                                             'link' => get_permalink($p->ID),
@@ -62,7 +62,7 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="member-page__message alert alert-dark" role="alert">No Favorites.</div>
+                                    <div class="member-page__message alert alert-dark" role="alert">Geen favorieten.</div>
                                 @endif
                             </div>
                         @else

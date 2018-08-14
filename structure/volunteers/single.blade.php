@@ -14,7 +14,7 @@
                     <div class="card my-3">
                         <h5 class="card-header">Posted on</h5>
                         <div class="card-body">
-                        <h5 class="card-title">{{date("d M Y", strtotime($userdata->user_registered))}}</h5>
+                        <h5 class="card-title">{{date_i18n("d M Y", strtotime($userdata->user_registered))}}</h5>
                         </div>
                     </div>
                     <div class="card my-3">
@@ -84,7 +84,7 @@
                             <h2>Applied to<h2>
                             @foreach ($posts as $p){{-- // variable must NOT be called $post (IMPORTANT) --}}                            
                                 @php
-                                    $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' ago';
+                                    $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' geleden';
                                     $vacancy = [
                                         'title' => $p->post_title,
                                         'link' => get_permalink($p->ID),

@@ -11,7 +11,7 @@
                         $title = get_the_title();
                         $category = is_array(get_field('categorie'))? implode(', ',get_field('categorie')) : get_field('categorie');
                         //date("d M Y", strtotime(get_the_date()))
-                        $time = date("d M Y", strtotime(get_the_date())) . ' - Breda, Nederland';
+                        $time = date_i18n("d M Y", strtotime(get_the_date())) . ' - Breda, Nederland';
 
                         $acf = [
                             'opleidingsniveau' => implode(', ',get_field('opleidingsniveau')),

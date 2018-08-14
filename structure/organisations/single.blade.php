@@ -19,10 +19,10 @@
                     <div class="d-flex company__profile">
                         <div class="company__logo-wrapper">
                             @php
-                                $image = get_field('afbeelding', 'user_' . $user->ID);
-                                $image = $image ? $image : '//placehold.it/144x76';
+                                $image = get_field('afbeelding', 'user_' . $ID);
+                                $image = $image ? $image : '//placehold.it/114x76';
                             @endphp
-                            <img src="{{ $image }}" class="w-100 img-fluid company__logo">
+                            <img src="{{ $image }}" class="company__logo">
                         </div>
                         <div class="company__contact">
                             <div class="d-flex flex-column company__contact-group">
@@ -67,7 +67,7 @@
                     <h1>Vacancies</h1>    
                         @foreach ($posts as $p)
                             @php
-                                $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' ago';
+                                $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' geleden';
                                 $vacancy = [
                                     'title' => $p->post_title,
                                     'link' => get_permalink($p->ID),

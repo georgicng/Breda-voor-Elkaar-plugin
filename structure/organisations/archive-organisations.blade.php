@@ -119,7 +119,7 @@
                                     <div class="col-xxl-10 col-md-9 col-xs-12 vacancy-card__header-group">
                                         <h2 class="card-title vacancy-card__header">{{  $user->display_name  }}</h2>
                                         @if(get_field('categorie', 'user_' . $user->ID))                                            
-                                        <h3 class="card-subtitle vacancy-card__subheader">{{implode(', ',get_field('categorie', 'user_' . $user->ID))}}</h3>
+                                        <h3 class="card-subtitle vacancy-card__subheader">{{is_array(get_field('categorie', 'user_' . $user->ID))? implode(', ',get_field('categorie', 'user_' . $user->ID)) : get_field('categorie', 'user_' . $user->ID)}}</h3>
                                         @endif
                                     </div>
                                 </div>

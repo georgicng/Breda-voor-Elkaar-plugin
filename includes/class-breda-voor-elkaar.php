@@ -150,12 +150,12 @@ class Breda_Voor_Elkaar
         /**
          * The class responsible for the custom links functionality.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'structure/links/links.php';
+        //require_once plugin_dir_path(dirname(__FILE__)) . 'structure/links/links.php';
 
         /**
          * The class responsible for the custom content block functionality.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'structure/content/content.php';
+        //require_once plugin_dir_path(dirname(__FILE__)) . 'structure/content/content.php';
 
         /**
          * The class responsible for the custom content block functionality.
