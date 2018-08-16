@@ -33,9 +33,9 @@ class Breda_Voor_Elkaar
      * The loader that's responsible for maintaining and registering all hooks that power
      * the plugin.
      *
-     * @since    1.0.0
-     * @access   protected
-     * @var      Breda_Voor_Elkaar_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @since  1.0.0
+     * @access protected
+     * @var  Breda_Voor_Elkaar_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -51,9 +51,9 @@ class Breda_Voor_Elkaar
     /**
      * The current version of the plugin.
      *
-     * @since    1.0.0
-     * @access   protected
-     * @var      string    $version    The current version of the plugin.
+     * @since  1.0.0
+     * @access protected
+     * @var  string    $version    The current version of the plugin.
      */
     protected $version;
 
@@ -64,7 +64,7 @@ class Breda_Voor_Elkaar
      * Load the dependencies, define the locale, and set the hooks for the admin area and
      * the public-facing side of the site.
      *
-     * @since    1.0.0
+     * @since 1.0.0
      */
     public function __construct()
     {
@@ -146,16 +146,6 @@ class Breda_Voor_Elkaar
          * The class responsible for the custom courses functionality.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'structure/courses/courses.php';
-
-        /**
-         * The class responsible for the custom links functionality.
-         */
-        //require_once plugin_dir_path(dirname(__FILE__)) . 'structure/links/links.php';
-
-        /**
-         * The class responsible for the custom content block functionality.
-         */
-        //require_once plugin_dir_path(dirname(__FILE__)) . 'structure/content/content.php';
 
         /**
          * The class responsible for the custom content block functionality.
