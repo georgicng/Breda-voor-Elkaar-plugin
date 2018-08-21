@@ -254,7 +254,7 @@ function archive_vacancy_template($page_template)
     }
     return $page_template;
 }
-//add_filter( 'archive_template', 'archive_vacancy_template' );
+add_filter('archive_template', 'archive_vacancy_template');
 
 /**
  * Set template for single page.
@@ -266,4 +266,4 @@ function single_vacancy_template($page_template)
     }
     return $page_template;
 }
-//add_filter( 'single_template', 'single_vacancy_template' );
+add_filter('single_template', 'single_vacancy_template');

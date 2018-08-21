@@ -40,7 +40,8 @@ define('PLUGIN_NAME_VERSION', '0.1.0');
  * The code that runs during plugin activation.
  * This action is documented in includes/class-breda-voor-elkaar-activator.php
  */
-function activate_breda_voor_elkaar() {
+function activate_breda_voor_elkaar()
+{
     require_once plugin_dir_path(__FILE__) . 'includes/class-breda-voor-elkaar-activator.php';
     Breda_Voor_Elkaar_Activator::activate();
 }
@@ -49,7 +50,8 @@ function activate_breda_voor_elkaar() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-breda-voor-elkaar-deactivator.php
  */
-function deactivate_breda_voor_elkaar() {
+function deactivate_breda_voor_elkaar()
+{
     require_once plugin_dir_path(__FILE__) . 'includes/class-breda-voor-elkaar-deactivator.php';
     Breda_Voor_Elkaar_Deactivator::deactivate();
 }
@@ -72,7 +74,8 @@ require plugin_dir_path(__FILE__) . 'includes/class-breda-voor-elkaar.php';
  *
  * @since    1.0.0
  */
-function run_breda_voor_elkaar() {
+function run_breda_voor_elkaar()
+{
     $plugin = new Breda_Voor_Elkaar();
     $plugin->run();
 }
@@ -82,7 +85,8 @@ run_breda_voor_elkaar();
  * Change author slug
  */
 add_action('init', 'change_author_slug');
-function change_author_slug() {
+function change_author_slug()
+{
     global $wp_rewrite;
     $author_slug = 'profile'; // change slug name
     $wp_rewrite->author_base = $author_slug;
@@ -93,7 +97,8 @@ function change_author_slug() {
  *
  * @param $template represents the template as it came in through the template_include hook
  */
-function change_template_single_author($template) {
+function change_template_single_author($template)
+{
     if (is_author()) {
         $author_id = get_query_var('author');
         $author_meta = get_userdata($author_id);
@@ -113,8 +118,10 @@ add_filter('template_include', 'change_template_single_author');
 /**
  * Output pagination for posts and users.
  */
-function numeric_pagination($current_page, $num_pages) {
-    echo '<div class="pagination">';
+function numeric_pagination($current_page, $num_pages)
+{
+    echo '<nav class="d-flex justify-content-center vacancy-list__pagination custom-pagination">'.
+    '<ul class="pagination pagination-sm custom-pagination__list">';
     $start_number = $current_page - 2;
     $end_number = $current_page + 2;
 
@@ -129,38 +136,39 @@ function numeric_pagination($current_page, $num_pages) {
     }
 
     if ($start_number > 1) {
-        echo " 1 ... ";
+        echo '<li class="page-item custom-pagination__item"> 1 ... </li>';
     }
 
     for ($i = $start_number; $i <= $end_number; $i++) {
         if ($i === $current_page) {
-            echo '<a href="?page='.$i.'">';
+            echo '<li class="page-item active custom-pagination__item"><a href="?page='.$i.'" class="page-link custom-pagination__link">';
             echo " [{$i}] ";
-            echo '</a>';
+            echo '</a></li>';
         } else {
-            echo '<a href="?page='.$i.'">';
+            echo '<li class="page-item custom-pagination__item"><a href="?page='.$i.'" class="page-link custom-pagination__link">';
             echo " {$i} ";
-            echo '</a>';
+            echo '</a></li>';
         }
     }
 
     if ($end_number < $num_pages) {
-        echo " ... {$num_pages} ";
+        echo '<li class="page-item custom-pagination__item">... {$num_pages}</li>';
     }
-    echo '</div>';
+    echo '</ul></nav>';
 }
 
 /**
  * Script to add filter variables to the url and refresh.
  * Originally taken from ACF documentation.
  */
-function filter_script($page){
+function filter_script($page)
+{
     ?>
 
 <script type="text/javascript">
 (function($) {
     // change
-    $('#archive-filters').on('change', 'input[type="checkbox"]', function(){
+    $('#archive-filters').on('change', 'input[type="checkbox"],select', function(){
         // vars
         var url = '<?php echo home_url($page); ?>';
             args = {};
@@ -170,8 +178,10 @@ function filter_script($page){
             var filter = $(this).data('filter'),
                 vals = [];
             // find checked inputs
-            $(this).find('input:checked').each(function(){
-                vals.push( $(this).val() );
+            $(this).find('input:checked, option:selected').each(function(){
+                if( $(this).val()  !== '*'){
+                    vals.push( $(this).val() );
+                }                
             });
             // append to args
             args[ filter ] = vals.join(',');
@@ -198,7 +208,8 @@ function filter_script($page){
 /**
  * Disable the administrator bar for non-admins.
  */
-function remove_admin_bar() {
+function remove_admin_bar()
+{
     if (!current_user_can('administrator') && !is_admin()) {
         show_admin_bar(false);
     }
@@ -206,7 +217,8 @@ function remove_admin_bar() {
 add_action('after_setup_theme', 'remove_admin_bar');
 
 
-function register_custom_fields_users() {
+function register_custom_fields_users()
+{
     if (function_exists('acf_add_local_field_group')) {
         acf_add_local_field_group([
             'key' => 'acf_user',
@@ -248,7 +260,8 @@ function register_custom_fields_users() {
 }
 add_action('acf/init', 'register_custom_fields_users');
 
-function restrict_post_deletion($post_ID){
+function restrict_post_deletion($post_ID)
+{
     $restricted_pages = array(
         'Organisaties',
         'Vrijwilligers',
@@ -261,7 +274,7 @@ function restrict_post_deletion($post_ID){
         'Favorieten',
         'Wijzig Wachtwoord',
     );
-    if(in_array(get_the_title($post_ID), $restricted_pages)){
+    if (in_array(get_the_title($post_ID), $restricted_pages)) {
         echo "Can not delete page from WordPress. Disable the Breda Voor Elkaar plugin to delete the page.";
         exit;
     }
