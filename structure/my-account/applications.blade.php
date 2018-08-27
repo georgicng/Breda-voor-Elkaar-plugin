@@ -27,7 +27,7 @@
                                     $posts = get_field('applications', 'user_' . $user->ID);
                                 @endphp
                                 @if ($posts)
-                                    <h1>Applied to</h1>
+                                    <h1>Reacties</h1>
                                     @foreach ($posts as $p) {{-- variable must NOT be called $post (IMPORTANT) --}}
                                         @php
                                         $time = human_time_diff(get_post_time('U', true, $p), current_time('timestamp')) . ' geleden';
