@@ -53,28 +53,12 @@
                                         $field['value'] = array();
                                     }
                                 @endphp
-                                @if($key  == "ervaring" || $key  == "leeftijd")
-                                    <section class="mb-4 layered__group">
-                                        <h2 class="layered__group-header">{{$field['label']}}</h2>
-                                        <div class="filter" data-filter="{{$key}}">
-                                            <select name="acf[{{$acf_key}}]" id="acf-{{$acf_key}}" class="form-control w-50 layered__field">
-                                                <option value="*">Alle</option>
-                                            @foreach($field['choices'] as $value => $label)
-                                                <option value="{{$value}}" @php echo ($value == $_GET[$key])? 'selected':'' @endphp>
-                                                    {{$label}}
-                                                </option>                                                    
-                                            @endforeach
-                                            </select>
-                                        </div>
-                                    </section>
-                                @else
-                                    <section class="mb-4 layered__group">
-                                        <h2 class="layered__group-header">{{$field['label']}}</h2>
-                                        <div class="filter" data-filter="{{$key}}">
-                                            {!! render_field($field) !!}
-                                        </div>
-                                    </section>
-                                @endif
+                                <section class="mb-4 layered__group">
+                                    <h2 class="layered__group-header">{{$field['label']}}</h2>
+                                    <div class="filter" data-filter="{{$key}}">
+                                        {!! render_field($field) !!}
+                                    </div>
+                                </section>
                             @endforeach
                         </div>
                     </aside>

@@ -82,7 +82,7 @@
                                     <img src="@asset('images/linkedin.svg')" class="cv__social-link" alt="Linkedin">
                                 </a>
                                 <a href="{{$share['gplus']}}" target="_blank">
-                                    <img src="@asset('images/google.svg')" class="cv__social-link cv__social-link_last" alt=Google + "">
+                                    <img src="@asset('images/google.svg')" class="cv__social-link cv__social-link_last" alt="Google +">
                                 </a>
                             </div>
                         </nav>
