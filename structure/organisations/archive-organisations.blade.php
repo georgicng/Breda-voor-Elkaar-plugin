@@ -111,16 +111,14 @@
                                 <div class="row vacancy-card__header-wrapper">
                                     <div class="col-xxl-2 col-md-3 col-xs-12 vacancy-card__figure d-flex align-items-center">
                                         @php
-                                            $image = get_field('afbeelding', 'user_' . $user->ID);
+                                            $image = get_field('logo', 'user_' . $user->ID);
                                             $image = $image ? $image : '//placehold.it/114x76';
                                         @endphp
                                         <img src="{{$image}}" class="vacancy-card__image">
                                     </div>
                                     <div class="col-xxl-10 col-md-9 col-xs-12 vacancy-card__header-group">
-                                        <h2 class="card-title vacancy-card__header">{{  $user->display_name  }}</h2>
-                                        @if(get_field('categorie', 'user_' . $user->ID))                                            
-                                        <h3 class="card-subtitle vacancy-card__subheader">{{is_array(get_field('categorie', 'user_' . $user->ID))? implode(', ',get_field('categorie', 'user_' . $user->ID)) : get_field('categorie', 'user_' . $user->ID)}}</h3>
-                                        @endif
+                                        <h2 class="card-title vacancy-card__header">{{  get_field('name', 'user_' . $user->ID) }}</h2>                                          
+                                        <h3 class="card-subtitle vacancy-card__subheader">{{get_field('place', 'user_' . $user->ID)}}</h3>
                                     </div>
                                 </div>
                                 <div class="card-body vacancy-card__body">

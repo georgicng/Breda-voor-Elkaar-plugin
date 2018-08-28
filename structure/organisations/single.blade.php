@@ -19,42 +19,31 @@
                     <div class="d-flex company__profile">
                         <div class="company__logo-wrapper">
                             @php
-                                $image = get_field('afbeelding', 'user_' . $ID);
+                                $image = get_field('logo', 'user_' . $ID);
                                 $image = $image ? $image : '//placehold.it/114x76';
                             @endphp
                             <img src="{{ $image }}" class="company__logo">
                         </div>
                         <div class="company__contact">
                             <div class="d-flex flex-column company__contact-group">
-                                @if(get_field('adres', 'user_' . $ID))
-                                <small class="company__address">{{ get_field('adres', 'user_' . $ID)['address'] }}</small>
+                                @if(get_field('address', 'user_' . $ID))
+                                <small class="company__address">{{ get_field('address', 'user_' . $ID)['address'] }}</small>
                                 @endif
-                                @if(get_field('telefoonnummer', 'user_' . $ID))
-                                <small class="company__phone">{{ get_field('telefoonnummer', 'user_' . $ID) }}</small>
+                                @if(get_field('postcode', 'user_' . $ID))
+                                <small class="company__phone">{{ get_field('postcode', 'user_' . $ID) }}</small>
                                 @endif
-                                @if($userdata->user_url)
-                                <small class="company__website">{{$userdata->user_url}}</small>
+                                @if(get_field('place', 'user_' . $ID))
+                                <small class="company__email">{{ get_field('place', 'user_' . $ID) }}</small>
                                 @endif
-                                @if($userdata->user_email)
-                                <small class="company__email">{{$userdata->user_email}}</small>
-                                @endif
+                                @if(get_field('website', 'user_' . $ID))
+                                <small class="company__website">{{ get_field('website', 'user_' . $ID)}}</small>
+                                @endif                                
                             </div>
                         </div>
                     </div>
                     <div class="row company__bio">
                         {{ $userdata->description }}
                     </div>
-                    @if($categories = get_field('categorie', 'user_' . $ID))
-                        <div class="d-flex flex-wrap text-dark company__categories">
-                            @if(is_array($categories))
-                                @foreach($categories as $category)
-                                <span class="btn bg-transparent border border-dark company__category">{{$category}}</span>
-                                @endforeach
-                            @else
-                                <span class="btn bg-transparent border border-dark company__category">{{$categories}}</span>
-                            @endif
-                        </div>
-                    @endif
 
                     @php
                         $args = array(
@@ -71,11 +60,11 @@
                                 $vacancy = [
                                     'title' => $p->post_title,
                                     'link' => get_permalink($p->ID),
-                                    'image_link' => get_field('afbeelding', 'user_'.$p->post_author),
+                                    'image_link' => get_field('logo', 'user_'.$p->post_author),
                                     'excerpt' => wp_kses_post(wp_trim_words($p->post_content, 25, '...')),
                                     'footer' => $time . ' - Breda, Nederland',
                                 ];
-                                $categories = get_field('categorie', $p->ID);
+                                $categories = get_field('categories', $p->ID);
                                 if (is_array($categories)){
                                     $vacancy['subtitle'] = implode(", ", $categories);
                                 } else {
