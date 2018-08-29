@@ -12,11 +12,12 @@
                         $category = is_array(get_field('categories'))? implode(', ',get_field('categories')) : get_field('categories');
                         //date("d M Y", strtotime(get_the_date()))
                         $time = date_i18n("j M Y", strtotime(get_the_date())) . ' - Breda, Nederland';
+                        $author = get_the_author_meta( 'ID' );
 
                         $acf = [
-                            'opleidingsniveau' => implode(', ',get_field('requirements')),
-                            'ervaring' => implode(', ',get_field('competency')),
-                            'vergoeding' => implode(', ',get_field('compensation'))
+                            'opleidingsniveau' => implode(', ', get_field('requirements')),
+                            'ervaring' => implode(', ', get_field('competency')),
+                            'vergoeding' => implode(', ', get_field('compensation'))
                         ];
                     @endphp                 
                     <div class="row">
@@ -46,11 +47,11 @@
                             } else if(isset($_POST['Reageer']) && $role[0] == 'volunteer'){
                                 $user_id = $_POST['user_id'];
                                 $post_id = $_POST['post_id'];
-                                $current_array = get_field('applied','user_'.$user_id);
+                                $current_array = get_field('applications','user_'.$user_id);
                                 $current_array = (array)$current_array;
                                 if(!in_array($post_id,$current_array)){
                                     $current_array[] = $post_id;
-                                    update_field('applied', $current_array, 'user_'.$user_id);
+                                    update_field('applications', $current_array, 'user_'.$user_id);
                                 }
                             }
                         @endphp
@@ -70,6 +71,8 @@
                                 @elseif (!is_user_logged_in())
                                     <a href="{{ wp_login_url(get_permalink()) }}"  class="cv__link">Reageer nu ›</a>
                                     <a href="{{ wp_login_url(get_permalink()) }}"  class="cv__link">Favoriet ›</a>
+                                @else
+                                    <span class="cv__link">Niet in aanmerking komen</span>
                                 @endif
                             </div>     
                         
@@ -94,7 +97,7 @@
                         <article class="col-lg-8 cv__profile">
                                 {!! get_the_content() !!}
                                 @if (is_user_logged_in())
-                                    @php comments_template('/partials/comments.blade.php')
+                                    @php comments_template('/partials/comments.blade.php') @endphp
                                 @else
                                     <div class="alert alert-dark"><a href="{{wp_login_url()}}">Log in</a> om te reageren op deze vacature</div> 
                                 @endif
@@ -114,7 +117,50 @@
                                     </li>
                                 </ul>
                             </div>                           
-                            {!! dynamic_sidebar('sidebar-primary') !!}
+                            <div class="sidebar__item company">
+                                <h5 class="sidebar__title"><a href="{{get_author_posts_url($author)}}">{{ get_field('name', 'user_' . $author) }}</a></h5>
+                                <div>
+                                    <div class="d-flex flex-column company__profile">
+                                        <div class="company__logo-wrapper">
+                                            @php
+                                                $image = get_field('logo', 'user_' . $author);
+                                                $image = $image ? $image : '//placehold.it/114x76';
+                                            @endphp
+                                            <img src="{{ $image }}" class="company__logo">
+                                        </div>
+                                        <div class="company__contact">
+                                            <div class="d-flex flex-column company__contact-group">
+                                                @if(get_field('address', 'user_' . $author))
+                                                <small class="company__address">{{ get_field('address', 'user_' . $author)['address'] }}</small>
+                                                @endif
+                                                @if(get_field('postcode', 'user_' . $author))
+                                                <small class="company__phone">{{ get_field('postcode', 'user_' . $author) }}</small>
+                                                @endif
+                                                @if(get_field('place', 'user_' . $author))
+                                                <small class="company__email">{{ get_field('place', 'user_' . $author) }}</small>
+                                                @endif
+                                                @if(get_field('website', 'user_' . $ID))
+                                                <small class="company__website">{{ get_field('website', 'user_' . $author)}}</small>
+                                                @endif                                
+                                            </div>
+                                            <nav class="company__social-links">
+                                                <a href="{{get_field('facebook', 'user_' . $author)}}" target="_blank" class="company__social-link">
+                                                    <img src="@asset('images/facebook.svg')" alt="Facebook" class="company__social-link-icon">
+                                                </a>
+                                                <a href="{{get_field('twitter', 'user_' . $author)}}" target="_blank" class="company__social-link">
+                                                    <img src="@asset('images/twitter.svg')" alt="Twitter" class="company__social-link-icon">
+                                                </a>
+                                                <a href="{{get_field('linkedin', 'user_' . $author)}}" target="_blank" class="company__social-link">
+                                                    <img src="@asset('images/linkedin.svg')" alt="Linkedin" class="company__social-link-icon">
+                                                </a>
+                                                <a href="{{get_field('instagram', 'user_' . $author)}}" target="_blank" class="company__social-link">
+                                                    <img src="@asset('images/instagram.svg')" alt="Instagram" class="company__social-link-icon">
+                                                </a>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
                         </aside>
                     </div>
                 @endwhile

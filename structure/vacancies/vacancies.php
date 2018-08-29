@@ -42,10 +42,10 @@ function register_custom_fields_vacancy()
                 'fields' => array (
                     array (
                         'key' => 'field_5b7ef8e109d65',
-                        'label' => 'Waar vindt het vrijwilligerswerk plaats (maximaal 3 antwoorden mogelijk)',
+                        'label' => 'Waar vindt het vrijwilligerswerk plaats',
                         'name' => 'region',
                         'type' => 'checkbox',
-                        'instructions' => '',
+                        'instructions' => 'maximaal 3 antwoorden mogelijk',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -75,10 +75,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7ef92009d66',
-                        'label' => 'Hoe vaak is inzet van de vrijwilliger nodig voor dit vrijwilligerswerk (maximaal 1 antwoord mogelijk)',
+                        'label' => 'Hoe vaak is inzet van de vrijwilliger nodig voor dit vrijwilligerswerk',
                         'name' => 'frequency',
                         'type' => 'checkbox',
-                        'instructions' => '',
+                        'instructions' => 'maximaal 1 antwoord mogelijk',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -101,10 +101,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7ef96709d67',
-                        'label' => 'Hoeveel uren per week of per keer is voor deze vacature nodig (maximaal 1 antwoord mogelijk)',
+                        'label' => 'Hoeveel uren per week of per keer is voor deze vacature nodig',
                         'name' => 'period',
                         'type' => 'checkbox',
-                        'instructions' => '',
+                        'instructions' => 'maximaal 1 antwoord mogelijk',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -128,10 +128,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7ef9ba09d68',
-                        'label' => 'Wat voor type mooi werk bied je aan (maximaal 3 antwoorden mogelijk)',
+                        'label' => 'Wat voor type mooi werk bied je aan',
                         'name' => 'categories',
                         'type' => 'checkbox',
-                        'instructions' => '',
+                        'instructions' => 'maximaal 3 antwoorden mogelijk',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -207,10 +207,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7efa5509d6a',
-                        'label' => 'In dit vrijwilligerswerk werk je met name met (maximaal 3 antwoorden mogelijk)',
+                        'label' => 'In dit vrijwilligerswerk werk je met name met',
                         'name' => 'target',
                         'type' => 'checkbox',
-                        'instructions' => '',
+                        'instructions' => 'maximaal 3 antwoorden mogelijk',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -240,10 +240,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7efab409d6b',
-                        'label' => 'Deze vacature is ook geschikt voor (meerdere antwoorden mogelijk)',
+                        'label' => 'Deze vacature is ook geschikt voor',
                         'name' => 'requirements',
                         'type' => 'checkbox',
-                        'instructions' => '',
+                        'instructions' => 'meerdere antwoorden mogelijk',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -269,10 +269,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7efb4209d6c',
-                        'label' => 'Bied je een vergoeding (maximaal 2 antwoorden mogelijk)',
+                        'label' => 'Bied je een vergoeding',
                         'name' => 'compensation',
                         'type' => 'checkbox',
-                        'instructions' => '',
+                        'instructions' => 'maximaal 2 antwoorden mogelijk',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -296,7 +296,7 @@ function register_custom_fields_vacancy()
                     array (
                         'key' => 'field_5b7efba009d6d',
                         'label' => 'Uiterste reactiedatum',
-                        'name' => 'uiterste_reactiedatum',
+                        'name' => 'date',
                         'type' => 'date_picker',
                         'instructions' => '',
                         'required' => 1,

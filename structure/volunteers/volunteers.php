@@ -33,7 +33,7 @@ function register_custom_fields_volunteer() {
                             'class' => '',
                             'id' => '',
                         ),
-                        'return_format' => 'array',
+                        'return_format' => 'url',
                         'preview_size' => 'thumbnail',
                         'library' => 'all',
                         'min_width' => '',
@@ -280,10 +280,10 @@ function register_custom_fields_volunteer() {
                     ),
                     array(
                         'key' => 'field_5b7ef3339488a',
-                        'label' => 'Hoeveel uren per week of per keer ben je maximaal beschikbaar voor vrijwilligerswerk (maximaal 1 antwoord mogelijk)',
+                        'label' => 'Hoeveel uren per week of per keer ben je maximaal beschikbaar voor vrijwilligerswerk',
                         'name' => 'availability',
                         'type' => 'radio',
-                        'instructions' => '',
+                        'instructions' => 'maximaal 1 antwoord mogelijk',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(

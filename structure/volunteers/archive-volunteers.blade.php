@@ -125,12 +125,12 @@
                                     <div class="col-xxl-10 col-md-9 col-xs-12 vacancy-card__header-group">
                                         <h2 class="card-title vacancy-card__header">{{ get_field('first-name', 'user_' . $user->ID)}} {{get_field('last-name', 'user_' . $user->ID) }}</h2>
                                         @if(get_field('categorie', 'user_' . $user->ID))                                            
-                                        <h3 class="card-subtitle vacancy-card__subheader">{{get_field('age', 'user_' . $user->ID))}}</h3>
+                                        <h3 class="card-subtitle vacancy-card__subheader">{{get_field('age', 'user_' . $user->ID)}}</h3>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="card-body vacancy-card__body">
-                                    <div class="vacancy-card__text">{{get_field('bio', 'user_' . $user->ID))}}</div>
+                                    <div class="vacancy-card__text">{{get_field('bio', 'user_' . $user->ID)}}</div>
                                     <a href="{{ get_author_posts_url($user->ID) }}" class="card-link">lees meer ›</a>
                                 </div>
                                 <div class="card-footer vacancy-card__footer">{{is_array(get_field('qualification', 'user_' . $user->ID))? implode(', ',get_field('qualification', 'user_' . $user->ID)) : get_field('qualification', 'user_' . $user->ID)}}</div>                                

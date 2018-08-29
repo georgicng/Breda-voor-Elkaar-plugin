@@ -29,35 +29,11 @@
 
                 // Filters
                 $meta_query = array('relation' => 'OR'); // Array of arrays that individually store key/value pairs.
-                $filter_keys = array(
-                    'field_5b06cc6d43567' => 'categorie',
-                );
+                
             @endphp
             <div class="row">
                 <aside id="archive-filters" class="col-lg-4 vacancy-list__layered layered">
-                    <a href="#filters" class="list-group-item d-lg-none layered__bar" data-toggle="collapse" aria-expanded="false">Filter</a>
-                    <div id="filters" class="layered__form collapse dont-collapse-lg">
-                        {{--// Loop over all filter keys and check if they are set in the _Get variable.--}}
-                        @foreach($filter_keys as $acf_key => $key)
-                        @php
-                            // get the field's settings without attempting to load a value
-                            $field = get_field_object($acf_key, false, false);
-
-                            if(isset($_GET[$key])){
-                                $field['value'] = explode(',', $_GET[$key]);
-                                add_to_meta_query_if_get_exists($key,$_GET[$key],$meta_query);
-                            } else {
-                                $field['value'] = array();
-                            }
-                            @endphp
-                            <section class="mb-4 layered__group">
-                                <h2 class="layered__group-header">{{$field['label']}}</h2>
-                                <div class="filter" data-filter="{{  $key }}">
-                                    {!! render_field($field); !!}
-                                </div>
-                            </section>
-                        @endforeach
-                    </div>
+                    @php dynamic_sidebar('sidebar-primary') @endphp
                 </aside>                
                 @php
                 // Add key, value pair to the post meta filters if it is set.
@@ -126,8 +102,13 @@
                                     <a href="{{ get_author_posts_url($user->ID) }}" class="card-link">lees meer ›</a>
                                 </div>
                                 @php
-                                    if(get_field('vacancies', 'user_' . $user->ID) !== null)
-                                        $count = count(get_field('vacancies', 'user_' . $user->ID));
+                                    $args = array(
+                                    'author' => $user->ID,
+                                    'post_type' => 'vacancies',
+                                    );
+                                    $posts = get_posts($args);
+                                    if($posts)
+                                        $count = count($posts);
                                     else
                                         $count = 0;
                                 @endphp
