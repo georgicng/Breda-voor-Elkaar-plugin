@@ -34,7 +34,7 @@ function register_custom_fields_volunteer() {
                             'id' => '',
                         ),
                         'return_format' => 'url',
-                        'preview_size' => 'thumbnail',
+                        'preview_size' => 'full',
                         'library' => 'all',
                         'min_width' => '',
                         'min_height' => '',

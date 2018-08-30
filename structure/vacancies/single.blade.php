@@ -99,7 +99,7 @@
                                 @if (is_user_logged_in())
                                     @php comments_template('/partials/comments.blade.php') @endphp
                                 @else
-                                    <div class="alert alert-dark"><a href="{{wp_login_url()}}">Log in</a> om te reageren op deze vacature</div> 
+                                    <div class="alert alert-dark mt-3"><a href="{{wp_login_url()}}">Log in</a> om te reageren op deze vacature</div> 
                                 @endif
                         </article>
                         <aside class="col-lg-4 cv__sidebar sidebar">

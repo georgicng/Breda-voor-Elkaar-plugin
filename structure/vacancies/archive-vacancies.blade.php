@@ -40,6 +40,16 @@
                     'field_5b7efab409d6b' => 'requirements',
                     'field_5b7efb4209d6c' => 'compensation'
                 );
+                $labels = array(
+                    'field_5b7ef8e109d65' => 'Locatie',
+                    'field_5b7ef92009d66' => 'Hoe vaak',
+                    'field_5b7ef96709d67' => 'Uren per week',
+                    'field_5b7ef9ba09d68' => 'Categorie',
+                    'field_5b7ef9f609d69' => 'Benodigde competenties',
+                    'field_5b7efa5509d6a' => 'Doelgroep',
+                    'field_5b7efab409d6b' => 'Ook geschikt voor',
+                    'field_5b7efb4209d6c' => 'Vergoeding'
+                );
             @endphp
                 <aside id="archive-filters" class="col-lg-4 vacancy-list__layered layered">
                     <a href="#filters" class="list-group-item d-lg-none layered__bar" data-toggle="collapse" aria-expanded="false">Filter</a>
@@ -59,7 +69,7 @@
                             }
                             @endphp
                             <section class="mb-4 layered__group">
-                            <h2 class="layered__group-header">{{$field['label']}}</h2>
+                            <h2 class="layered__group-header">{{$labels[$acf_key]}}</h2>
                             <div class="b-4 layered__field filter" data-filter="{{  $key }}">
                                 {!! render_field($field); !!}
                             </div>

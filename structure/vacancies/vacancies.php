@@ -42,10 +42,10 @@ function register_custom_fields_vacancy()
                 'fields' => array (
                     array (
                         'key' => 'field_5b7ef8e109d65',
-                        'label' => 'Waar vindt het vrijwilligerswerk plaats',
+                        'label' => 'Waar vindt het vrijwilligerswerk plaats (maximaal 3 antwoorden mogelijk)',
                         'name' => 'region',
                         'type' => 'checkbox',
-                        'instructions' => 'maximaal 3 antwoorden mogelijk',
+                        'instructions' => '',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -75,10 +75,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7ef92009d66',
-                        'label' => 'Hoe vaak is inzet van de vrijwilliger nodig voor dit vrijwilligerswerk',
+                        'label' => 'Hoe vaak is inzet van de vrijwilliger nodig voor dit vrijwilligerswerk (maximaal 1 antwoord mogelijk)',
                         'name' => 'frequency',
                         'type' => 'checkbox',
-                        'instructions' => 'maximaal 1 antwoord mogelijk',
+                        'instructions' => '',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -101,10 +101,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7ef96709d67',
-                        'label' => 'Hoeveel uren per week of per keer is voor deze vacature nodig',
+                        'label' => 'Hoeveel uren per week of per keer is voor deze vacature nodig (maximaal 1 antwoord mogelijk)',
                         'name' => 'period',
                         'type' => 'checkbox',
-                        'instructions' => 'maximaal 1 antwoord mogelijk',
+                        'instructions' => '',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -128,10 +128,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7ef9ba09d68',
-                        'label' => 'Wat voor type mooi werk bied je aan',
+                        'label' => 'Wat voor type mooi werk bied je aan (maximaal 3 antwoorden mogelijk)',
                         'name' => 'categories',
                         'type' => 'checkbox',
-                        'instructions' => 'maximaal 3 antwoorden mogelijk',
+                        'instructions' => '',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -207,10 +207,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7efa5509d6a',
-                        'label' => 'In dit vrijwilligerswerk werk je met name met',
+                        'label' => 'In dit vrijwilligerswerk werk je met name met (maximaal 3 antwoorden mogelijk)',
                         'name' => 'target',
                         'type' => 'checkbox',
-                        'instructions' => 'maximaal 3 antwoorden mogelijk',
+                        'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -240,10 +240,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7efab409d6b',
-                        'label' => 'Deze vacature is ook geschikt voor',
+                        'label' => 'Deze vacature is ook geschikt voor (meerdere antwoorden mogelijk)',
                         'name' => 'requirements',
                         'type' => 'checkbox',
-                        'instructions' => 'meerdere antwoorden mogelijk',
+                        'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -269,10 +269,10 @@ function register_custom_fields_vacancy()
                     ),
                     array (
                         'key' => 'field_5b7efb4209d6c',
-                        'label' => 'Bied je een vergoeding',
+                        'label' => 'Bied je een vergoeding (maximaal 2 antwoorden mogelijk)',
                         'name' => 'compensation',
                         'type' => 'checkbox',
-                        'instructions' => 'maximaal 2 antwoorden mogelijk',
+                        'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -329,7 +329,52 @@ function register_custom_fields_vacancy()
                 'active' => 1,
                 'description' => '',
             )
-        );            
+        ); 
+        
+        acf_add_local_field_group(
+            array (
+                'key' => 'group_5b86d5b97f387',
+                'title' => 'Vacancy Comment',
+                'fields' => array (
+                    array (
+                        'key' => 'field_5b86d5cc8043b',
+                        'label' => 'Ik ga akkoord met de Algemene Voorwaarden',
+                        'name' => 'tos',
+                        'type' => 'true_false',
+                        'instructions' => '',
+                        'required' => 1,
+                        'conditional_logic' => 0,
+                        'wrapper' => array (
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'message' => '',
+                        'default_value' => 0,
+                        'ui' => 0,
+                        'ui_on_text' => '',
+                        'ui_off_text' => '',
+                    ),
+                ),
+                'location' => array (
+                    array (
+                        array (
+                            'param' => 'comment',
+                            'operator' => '==',
+                            'value' => 'vacancies',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'top',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => '',
+                'active' => 1,
+                'description' => '',
+            )
+        );
     }
 }
 add_action('acf/init', 'register_custom_fields_vacancy');
