@@ -46,6 +46,7 @@ class Breda_Voor_Elkaar_Activator {
         create_page('Reacties');
         create_page('Favorieten');
         create_page('Wijzig Wachtwoord');
+        create_page('Opstelling');
     }
 }
 
