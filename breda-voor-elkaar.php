@@ -290,6 +290,7 @@ function restrict_post_deletion($post_ID)
         'Favorieten',
         'Wijzig Wachtwoord',
         'Opstelling',
+        'Inloggen',
         'Uitloggen',
         'Registreren',
         'Registreer Organisatie',

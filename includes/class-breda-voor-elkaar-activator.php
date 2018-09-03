@@ -47,7 +47,8 @@ class Breda_Voor_Elkaar_Activator {
         create_page('Favorieten');
         create_page('Wijzig Wachtwoord');
         create_page('Opstelling');
-        create_page('Uitloggen', '[theme-my-login action="login"]');
+        create_page('Inloggen', '[theme-my-login action="login"]');
+        create_page('Uitloggen', '[theme-my-login action="logout"]');
         create_page('Registreren', '[theme-my-login action="register"]');
         create_page('Registreer Organisatie', '[theme-my-login action="register"]');
         create_page('Registreer Vrijwilliger', '[theme-my-login action="register"]');
